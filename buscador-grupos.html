@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Buscador de grupos y personas expertas — FPU 2026 | AEI</title>
+<meta name="description" content="Buscador de grupos de investigación y personas expertas para candidaturas FPU 2026. Localiza grupos por área temática, universidad o centro y contacta para preparar conjuntamente la propuesta.">
+</head>
+<body>
+<div class="fpu-page">
+
+<!-- ===== CSS:BEGIN (auto-sync from assets/styles.css) ===== -->
+<style>
+/* ==========================================================================
+   ESTILOS GLOBALES — Web Convocatoria FPU 2026 (AEI)
+   Paleta inspirada en la web RYC pero con acento verde para FPU
+   ========================================================================== */
+
+:root {
+  --aei-azul: #1b4c96;
+  --aei-azul-oscuro: #143a73;
+  --aei-azul-claro: #dae3f3;
+  --fpu-verde: #2db26a;
+  --fpu-verde-oscuro: #1f8a4f;
+  --fpu-verde-claro: #d6f0e2;
+  --fondo-claro: #f0f4fa;
+  --fondo-blanco: #ffffff;
+  --texto-principal: #333333;
+  --texto-secundario: #666666;
+  --texto-claro: #ffffff;
+  --borde-suave: #d0daea;
+  --sombra-suave: 0 2px 8px rgba(0, 0, 0, 0.08);
+  --sombra-media: 0 4px 16px rgba(0, 0, 0, 0.12);
+  --radio-borde: 8px;
+  --transicion: 0.3s ease;
+}
+
+/* --- Reset y base --- */
+:where(.fpu-page, .fpu-page *, .fpu-page *::before, .fpu-page *::after) {
+  box-sizing: border-box;
+}
+.fpu-page { scroll-behavior: smooth; }
+.fpu-page {
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  font-feature-settings: "cv11", "ss01";
+  color: var(--texto-principal);
+  background-color: var(--fondo-claro);
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+:where(.fpu-page) img { max-width: 100%; height: auto; }
+:where(.fpu-page) a {
+  color: var(--aei-azul);
+  text-decoration: none;
+  transition: color var(--transicion);
+}
+:where(.fpu-page) a:hover {
+  color: var(--aei-azul-oscuro);
+  text-decoration: underline;
+}
+
+/* --- Navegación principal --- */
+.nav-principal { background: var(--aei-azul); }
+.nav-principal .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.nav-principal ul {
+  list-style: none; margin: 0; padding: 0;
+  display: flex; flex-wrap: wrap;
+}
+.nav-principal li a {
+  display: block;
+  color: var(--texto-claro);
+  padding: 0.85rem 1.25rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background var(--transicion);
+  white-space: nowrap;
+}
+.nav-principal li a:hover,
+.nav-principal li a.active {
+  background: rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+}
+.nav-principal li a.nav-destacado {
+  background: var(--fpu-verde);
+  color: var(--texto-claro);
+  font-weight: 600;
+}
+.nav-principal li a.nav-destacado:hover {
+  background: var(--fpu-verde-oscuro);
+}
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--texto-claro);
+  font-size: 1.5rem;
+  cursor: pointer;
+  padding: 0.5rem;
+}
+
+/* --- Breadcrumb --- */
+.breadcrumb {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0.75rem 1rem;
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+}
+.breadcrumb a { color: var(--aei-azul); }
+.breadcrumb span { margin: 0 0.4rem; color: #999; }
+
+/* --- Contenido principal --- */
+.fpu-page main { max-width: 1200px; margin: 0 auto; padding: 0 1rem 2rem; }
+
+/* --- Secciones --- */
+.seccion { margin-bottom: 3rem; }
+.seccion-titulo {
+  font-size: 1.75rem;
+  color: var(--aei-azul);
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 3px solid var(--fpu-verde);
+  font-weight: 700;
+}
+.seccion-subtitulo {
+  font-size: 1.25rem;
+  color: var(--aei-azul);
+  margin-bottom: 1rem;
+  font-weight: 600;
+}
+
+/* --- Tarjetas --- */
+.tarjetas-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+.tarjeta {
+  background: var(--fondo-blanco);
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-suave);
+  padding: 1.5rem;
+  transition: box-shadow var(--transicion), transform var(--transicion);
+  border-left: 4px solid var(--aei-azul);
+}
+.tarjeta:hover {
+  box-shadow: var(--sombra-media);
+  transform: translateY(-2px);
+}
+.tarjeta h3 {
+  color: var(--aei-azul);
+  font-size: 1.1rem;
+  margin: 0 0 0.75rem;
+}
+.tarjeta p { color: var(--texto-secundario); font-size: 0.95rem; margin: 0 0 0.75rem; }
+
+/* --- Botones --- */
+.btn-aei, .btn-fpu, .btn-fpu-outline {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radio-borde);
+  font-weight: 600;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  transition: background var(--transicion), color var(--transicion), transform var(--transicion);
+}
+.btn-aei { background: var(--aei-azul); color: var(--texto-claro); }
+.btn-aei:hover { background: var(--aei-azul-oscuro); color: var(--texto-claro); text-decoration: none; }
+.btn-fpu { background: var(--fpu-verde); color: var(--texto-claro); }
+.btn-fpu:hover { background: var(--fpu-verde-oscuro); color: var(--texto-claro); text-decoration: none; }
+.btn-fpu-outline {
+  background: transparent;
+  color: var(--aei-azul);
+  border: 2px solid var(--aei-azul);
+}
+.btn-fpu-outline:hover {
+  background: var(--aei-azul);
+  color: var(--texto-claro);
+  text-decoration: none;
+}
+
+/* --- Hero / Banner: franja decorativa arriba, texto sobre fondo limpio abajo --- */
+.hero {
+  background: var(--aei-azul-claro);
+  color: var(--texto-principal);
+  padding: 0;
+  position: relative;
+  overflow: hidden;
+}
+.hero-banner {
+  width: 100%;
+  height: 200px;
+  background: url('assets/banner-fpu.png') center / cover no-repeat;
+  border-bottom: 4px solid var(--fpu-verde);
+}
+.hero .container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 3rem;
+  text-align: center;
+}
+.hero-eyebrow {
+  display: inline-block;
+  background: var(--fpu-verde-claro);
+  color: var(--fpu-verde-oscuro);
+  border: 1px solid var(--fpu-verde);
+  padding: 0.3rem 0.8rem;
+  border-radius: 999px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 1.1rem;
+}
+.hero-texto h1 {
+  font-size: clamp(1.85rem, 4.5vw, 2.85rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0 0 0.85rem;
+  color: var(--aei-azul);
+  letter-spacing: -0.01em;
+}
+.hero-texto h1 span {
+  color: var(--fpu-verde-oscuro);
+  position: relative;
+  white-space: nowrap;
+}
+.hero-texto h1 span::after {
+  content: "";
+  position: absolute;
+  bottom: -0.1em;
+  left: 0;
+  right: 0;
+  height: 4px;
+  background: var(--fpu-verde);
+  border-radius: 2px;
+  opacity: 0.5;
+}
+.hero-texto p {
+  font-size: 1.1rem;
+  color: var(--texto-principal);
+  margin: 0 auto 1.5rem;
+  line-height: 1.65;
+  max-width: 700px;
+}
+.hero-botones {
+  display: flex;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+.hero-mini-stats {
+  margin-top: 1.25rem;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.4rem 0.85rem;
+  font-size: 0.92rem;
+  color: var(--texto-secundario);
+}
+.hero-mini-stats strong { color: var(--aei-azul); font-weight: 700; }
+.hero-mini-stats .sep { color: var(--fpu-verde); }
+@media (max-width: 600px) {
+  .hero-banner { height: 130px; }
+  .hero .container { padding: 1.75rem 1rem 2rem; }
+}
+
+/* --- Datos clave (cuadrícula 2×2 por defecto) --- */
+.datos-clave {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+.dato-item {
+  background: var(--fondo-blanco);
+  border-radius: var(--radio-borde);
+  padding: 1.25rem;
+  text-align: center;
+  box-shadow: var(--sombra-suave);
+  border-top: 4px solid var(--fpu-verde);
+}
+.dato-numero {
+  font-size: 2rem;
+  font-weight: 800;
+  color: var(--aei-azul);
+  line-height: 1.1;
+}
+.dato-label {
+  color: var(--texto-secundario);
+  font-size: 0.9rem;
+  margin-top: 0.25rem;
+}
+
+/* --- Novedades destacadas (lista) --- */
+.novedades-destacadas {
+  background: var(--fondo-blanco);
+  border-radius: var(--radio-borde);
+  padding: 2rem 2.5rem;
+  box-shadow: var(--sombra-suave);
+  position: relative;
+}
+.novedades-destacadas::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 4px;
+  background: linear-gradient(90deg, var(--aei-azul), var(--fpu-verde));
+  border-radius: var(--radio-borde) var(--radio-borde) 0 0;
+}
+.novedad-item {
+  display: flex;
+  gap: 1rem;
+  padding: 1.25rem 0;
+  border-bottom: 1px solid var(--borde-suave);
+  align-items: flex-start;
+}
+.novedad-item:last-child { border-bottom: none; }
+.novedad-icono {
+  flex-shrink: 0;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--aei-azul);
+  color: var(--texto-claro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.novedad-texto h3 {
+  color: var(--aei-azul);
+  font-size: 1.15rem;
+  margin: 0 0 0.4rem;
+}
+.novedad-texto p { margin: 0; color: var(--texto-secundario); }
+
+/* --- CTA destacada: buscador de grupos / personas expertas --- */
+.cta-buscador {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 2rem;
+  align-items: center;
+  background: linear-gradient(135deg, var(--aei-azul) 0%, var(--aei-azul-oscuro) 100%);
+  color: var(--texto-claro);
+  border-radius: var(--radio-borde);
+  padding: 2.5rem 2.5rem;
+  box-shadow: var(--sombra-media);
+  position: relative;
+  overflow: hidden;
+}
+.cta-buscador::after {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 5px;
+  background: var(--fpu-verde);
+}
+.cta-buscador-tag {
+  display: inline-block;
+  background: var(--fpu-verde);
+  color: var(--texto-claro);
+  padding: 0.2rem 0.7rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.85rem;
+}
+.cta-buscador h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.6rem;
+  color: var(--texto-claro);
+  font-weight: 700;
+}
+.cta-buscador p {
+  margin: 0 0 0.85rem;
+  color: rgba(255, 255, 255, 0.92);
+  line-height: 1.6;
+}
+.cta-buscador p:last-of-type { margin-bottom: 1.25rem; }
+.cta-buscador strong { color: var(--fpu-verde-claro); font-weight: 700; }
+.cta-buscador .btn-fpu {
+  background: var(--fpu-verde);
+  color: var(--texto-claro);
+}
+.cta-buscador .btn-fpu:hover { background: var(--fpu-verde-oscuro); }
+.cta-buscador-icono {
+  font-size: 6rem;
+  line-height: 1;
+  color: rgba(255, 255, 255, 0.18);
+  user-select: none;
+}
+@media (max-width: 768px) {
+  .cta-buscador { grid-template-columns: 1fr; padding: 1.75rem; }
+  .cta-buscador h2 { font-size: 1.3rem; }
+  .cta-buscador-icono { font-size: 4rem; text-align: center; }
+}
+
+/* --- Aviso "Próximamente" (página buscador-grupos) --- */
+.aviso-proximamente {
+  background: var(--fondo-blanco);
+  border-left: 5px solid var(--fpu-verde);
+  border-radius: var(--radio-borde);
+  padding: 1.75rem 2rem;
+  box-shadow: var(--sombra-suave);
+}
+.aviso-proximamente h2 {
+  color: var(--aei-azul);
+  margin: 0 0 0.5rem;
+  font-size: 1.4rem;
+}
+.aviso-proximamente p { margin: 0 0 0.75rem; }
+.aviso-proximamente p:last-child { margin-bottom: 0; }
+.aviso-tag {
+  display: inline-block;
+  background: var(--fpu-verde);
+  color: var(--texto-claro);
+  padding: 0.18rem 0.65rem;
+  border-radius: 4px;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  margin-bottom: 0.6rem;
+}
+
+/* --- Tarjeta de convocatoria --- */
+.convocatoria-card {
+  background: var(--fondo-blanco);
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-suave);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  border-left: 4px solid var(--aei-azul);
+  flex-wrap: wrap;
+}
+.convocatoria-card.vigente { border-left-color: var(--fpu-verde); }
+.convocatoria-info h3 { margin: 0; font-size: 1.05rem; color: var(--aei-azul); }
+.convocatoria-info .anio {
+  display: inline-block;
+  background: var(--aei-azul);
+  color: var(--texto-claro);
+  padding: 0.1rem 0.55rem;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  margin-right: 0.5rem;
+}
+.convocatoria-info .estado {
+  display: inline-block;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+}
+.convocatoria-info .estado.abierta { color: var(--fpu-verde-oscuro); font-weight: 600; }
+
+/* --- Sección con imagen --- */
+.seccion-con-imagen {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  align-items: center;
+}
+.seccion-imagen {
+  width: 100%;
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-suave);
+}
+
+/* --- Placeholder de imagen pendiente (mientras decidimos la foto definitiva) --- */
+.placeholder-imagen {
+  margin: 0;
+  width: 100%;
+  min-height: 220px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  border-radius: var(--radio-borde);
+  background: repeating-linear-gradient(
+    45deg,
+    var(--aei-azul-claro),
+    var(--aei-azul-claro) 14px,
+    #c8d6ee 14px,
+    #c8d6ee 28px
+  );
+  color: var(--aei-azul-oscuro);
+  font-size: 0.95rem;
+  font-style: italic;
+  padding: 1.5rem;
+  border: 2px dashed var(--aei-azul);
+}
+.placeholder-imagen .ph-icon { font-size: 2rem; margin-bottom: 0.5rem; }
+.placeholder-imagen figcaption { color: var(--aei-azul-oscuro); }
+
+/* Variante en banda ancha (para secciones full-width) */
+.placeholder-imagen.ancha { min-height: 180px; }
+
+/* --- Tabla simple --- */
+.tabla-simple {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--fondo-blanco);
+  box-shadow: var(--sombra-suave);
+  border-radius: var(--radio-borde);
+  overflow: hidden;
+}
+.tabla-simple th, .tabla-simple td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--borde-suave);
+  vertical-align: top;
+}
+.tabla-simple thead {
+  background: var(--aei-azul);
+  color: var(--texto-claro);
+}
+.tabla-simple tbody tr:hover { background: var(--fondo-claro); }
+.tabla-simple tbody tr:last-child td { border-bottom: none; }
+
+/* --- Acordeón (FAQ / detalles) --- */
+.acordeon-item {
+  background: var(--fondo-blanco);
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-suave);
+  margin-bottom: 0.75rem;
+  overflow: hidden;
+}
+.acordeon-header {
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 1rem 1.25rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--aei-azul);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+}
+.acordeon-header::after {
+  content: "+";
+  font-size: 1.5rem;
+  color: var(--fpu-verde);
+  transition: transform var(--transicion);
+}
+.acordeon-header.activo::after { content: "−"; }
+.acordeon-contenido {
+  display: none;
+  padding: 0 1.25rem 1.25rem;
+  color: var(--texto-principal);
+  border-top: 1px solid var(--borde-suave);
+}
+.acordeon-contenido.activo { display: block; }
+
+/* --- Banner cofinanciación / footer --- */
+.banner-cofinanciacion {
+  background: var(--fondo-blanco);
+  border-top: 1px solid var(--borde-suave);
+  margin-top: 2rem;
+  padding: 1.5rem 1rem;
+}
+.
+</style>
+<!-- ===== CSS:END ===== -->
+
+<nav aria-label="Navegación principal" class="nav-principal">
+    <div class="container">
+      <button aria-expanded="false" aria-label="Abrir menú" class="nav-toggle">☰</button>
+      <ul id="nav-menu">
+        <li><a href="index.html">Inicio FPU</a></li>
+        <li><a href="novedades-2026.html">Novedades 2026</a></li>
+        <li><a href="convocatoria.html">Convocatoria</a></li>
+        <li><a href="areas-tematicas.html">Áreas temáticas</a></li>
+        <li><a class="active nav-destacado" href="buscador-grupos.html">Buscador de grupos</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div aria-label="Ruta de navegación" class="breadcrumb">
+    <a href="index.html">Inicio FPU</a>
+    <span>›</span>
+    Buscador de grupos
+  </div>
+
+  <section class="hero">
+    <div class="hero-banner" aria-hidden="true"></div>
+    <div class="container">
+      <div class="hero-texto">
+        <h1>Buscador de <span>grupos y personas expertas</span></h1>
+        <p>Encuentra grupos de investigación por área temática, universidad o centro, y contacta directamente para preparar tu candidatura FPU 2026.</p>
+      </div>
+    </div>
+  </section>
+
+  <main>
+
+    <!-- ===== AVISO PROXIMAMENTE ===== -->
+    <section class="seccion">
+      <div class="aviso-proximamente">
+        <span class="aviso-tag">Próximamente</span>
+        <h2>¿Quieres encontrar a quienes son referencia en tu tema de investigación?</h2>
+        <p>En FPU <strong>eres tú</strong> quien elige el centro de investigación o la universidad donde dar los primeros pasos en tu carrera investigadora. Para ayudarte a localizar a los equipos que pueden acompañarte, la AEI está preparando un buscador que te permitirá:</p>
+        <ul>
+          <li>Explorar grupos por <strong>especialidad, área AEI, universidad o centro</strong>.</li>
+          <li>Conocer las <strong>líneas de investigación activas</strong> y la trayectoria de cada equipo.</li>
+          <li><strong>Contactar</strong> con la persona investigadora responsable y preparar conjuntamente la propuesta.</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- ===== CÓMO FUNCIONARÁ ===== -->
+    <section class="seccion">
+      <h2 class="seccion-titulo">Cómo funcionará</h2>
+      <div class="tarjetas-grid">
+        <div class="tarjeta">
+          <h3>1 · Busca por tema</h3>
+          <p>Introduce una palabra clave, especialidad o área temática AEI para localizar grupos que trabajen en ese ámbito.</p>
+        </div>
+        <div class="tarjeta">
+          <h3>2 · Filtra y compara</h3>
+          <p>Filtra por universidad, centro de I+D o comunidad autónoma. Consulta la trayectoria del grupo, líneas activas y publicaciones recientes.</p>
+        </div>
+        <div class="tarjeta">
+          <h3>3 · Contacta con el grupo</h3>
+          <p>Accede a la información de contacto y a la persona investigadora responsable para iniciar conversación y preparar la propuesta.</p>
+        </div>
+        <div class="tarjeta">
+          <h3>4 · Prepara la candidatura</h3>
+          <p>El centro de I+D donde se desarrolle la tesis presenta la solicitud FPU 2026 a través del Registro Unificado de Solicitantes (RUS).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== MIENTRAS TANTO ===== -->
+    <section class="seccion">
+      <h2 class="seccion-titulo">Mientras tanto</h2>
+      <p>Mientras desarrollamos el buscador, puedes consultar:</p>
+      <div class="tarjetas-grid">
+        <div class="tarjeta">
+          <h3>Áreas temáticas AEI</h3>
+          <p>Listado completo de áreas y subáreas en las que se enmarcará tu candidatura FPU.</p>
+          <a class="btn-fpu-outline" href="areas-tematicas.html">Ver áreas</a>
+        </div>
+        <div class="tarjeta">
+          <h3>Buscador de ayudas concedidas</h3>
+          <p>Consulta ayudas FPU y otras ayudas concedidas por la AEI para identificar grupos activos en cada área.</p>
+          <a class="btn-fpu-outline" href="https://www.aei.gob.es/ayudas/buscar-ayudas-concedidas" target="_blank" rel="noopener">Ir al buscador</a>
+        </div>
+        <div class="tarjeta">
+          <h3>Web de la AEI</h3>
+          <p>Información institucional, programas, convocatorias y contacto de la Agencia Estatal de Investigación.</p>
+          <a class="btn-fpu-outline" href="https://www.aei.gob.es/" target="_blank" rel="noopener">Ir a la AEI</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <section class="banner-cofinanciacion">
+    <div class="container">
+      <p class="cofinanciacion-texto">
+        Funcionalidad en desarrollo · Agencia Estatal de Investigación.
+      </p>
+    </div>
+  </section>
+
+<!-- ===== JS:BEGIN (auto-sync from assets/app.js) ===== -->
+<script>
+/* ==========================================================================
+   INTERACTIVIDAD — Web Convocatoria FPU 2026
+   ========================================================================== */
+document.addEventListener('DOMContentLoaded', function () {
+  // Menú hamburguesa
+  var navToggle = document.querySelector('.nav-toggle');
+  var navMenu = document.getElementById('nav-menu');
+  if (navToggle && navMenu) {
+    navToggle.addEventListener('click', function () {
+      var isOpen = navMenu.classList.toggle('nav-open');
+      navToggle.setAttribute('aria-expanded', isOpen);
+      navToggle.innerHTML = isOpen ? '&#10005;' : '&#9776;';
+    });
+    navMenu.querySelectorAll('a').forEach(function (link) {
+      link.addEventListener('click', function () {
+        navMenu.classList.remove('nav-open');
+        navToggle.setAttribute('aria-expanded', 'false');
+        navToggle.innerHTML = '&#9776;';
+      });
+    });
+  }
+
+  // Acordeones
+  document.querySelectorAll('.acordeon-header').forEach(function (header) {
+    header.addEventListener('click', function () {
+      var contenido = this.nextElementSibling;
+      var estaActivo = this.classList.contains('activo');
+      this.closest('.seccion').querySelectorAll('.acordeon-header').forEach(function (h) {
+        h.classList.remove('activo');
+        h.nextElementSibling.classList.remove('activo');
+      });
+      if (!estaActivo) {
+        this.classList.add('activo');
+        contenido.classList.add('activo');
+      }
+    });
+  });
+
+  // Scroll suave
+  document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
+    anchor.addEventListener('click', function (e) {
+      var target = document.querySelector(this.getAttribute('href'));
+      if (target) {
+        e.preventDefault();
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+});
+
+</script>
+<!-- ===== JS:END ===== -->
+
+</div>
+</body>
+</html>
