@@ -13,16 +13,16 @@
 <style>
 /* ==========================================================================
    ESTILOS GLOBALES — Web Convocatoria FPU 2026 (AEI)
-   Paleta inspirada en la web RYC pero con acento verde para FPU
+   Paleta: azul AEI + acento naranja FPU
    ========================================================================== */
 
 :root {
   --aei-azul: #1b4c96;
   --aei-azul-oscuro: #143a73;
   --aei-azul-claro: #dae3f3;
-  --fpu-verde: #2db26a;
-  --fpu-verde-oscuro: #1f8a4f;
-  --fpu-verde-claro: #d6f0e2;
+  --fpu-naranja: #e87722;
+  --fpu-naranja-oscuro: #b85e15;
+  --fpu-naranja-claro: #fce4ce;
   --fondo-claro: #f0f4fa;
   --fondo-blanco: #ffffff;
   --texto-principal: #333333;
@@ -41,15 +41,12 @@
 }
 .fpu-page { scroll-behavior: smooth; }
 .fpu-page {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-feature-settings: "cv11", "ss01";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: var(--texto-principal);
   background-color: var(--fondo-claro);
   line-height: 1.6;
   margin: 0;
   padding: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 :where(.fpu-page) img { max-width: 100%; height: auto; }
 :where(.fpu-page) a {
@@ -91,12 +88,12 @@
   text-decoration: none;
 }
 .nav-principal li a.nav-destacado {
-  background: var(--fpu-verde);
+  background: var(--fpu-naranja);
   color: var(--texto-claro);
   font-weight: 600;
 }
 .nav-principal li a.nav-destacado:hover {
-  background: var(--fpu-verde-oscuro);
+  background: var(--fpu-naranja-oscuro);
 }
 .nav-toggle {
   display: none;
@@ -129,7 +126,7 @@
   color: var(--aei-azul);
   margin-bottom: 1.5rem;
   padding-bottom: 0.5rem;
-  border-bottom: 3px solid var(--fpu-verde);
+  border-bottom: 3px solid var(--fpu-naranja);
   font-weight: 700;
 }
 .seccion-subtitulo {
@@ -177,8 +174,8 @@
 }
 .btn-aei { background: var(--aei-azul); color: var(--texto-claro); }
 .btn-aei:hover { background: var(--aei-azul-oscuro); color: var(--texto-claro); text-decoration: none; }
-.btn-fpu { background: var(--fpu-verde); color: var(--texto-claro); }
-.btn-fpu:hover { background: var(--fpu-verde-oscuro); color: var(--texto-claro); text-decoration: none; }
+.btn-fpu { background: var(--fpu-naranja); color: var(--texto-claro); }
+.btn-fpu:hover { background: var(--fpu-naranja-oscuro); color: var(--texto-claro); text-decoration: none; }
 .btn-fpu-outline {
   background: transparent;
   color: var(--aei-azul);
@@ -190,91 +187,51 @@
   text-decoration: none;
 }
 
-/* --- Hero / Banner: franja decorativa arriba, texto sobre fondo limpio abajo --- */
+/* --- Hero / Banner: franja superior con la imagen, texto debajo sobre fondo limpio --- */
 .hero {
   background: var(--aei-azul-claro);
   color: var(--texto-principal);
-  padding: 0;
   position: relative;
   overflow: hidden;
 }
-.hero-banner {
+.hero::before {
+  content: "";
+  display: block;
   width: 100%;
-  height: 200px;
+  height: 160px;
   background: url('assets/banner-fpu.png') center / cover no-repeat;
-  border-bottom: 4px solid var(--fpu-verde);
+  border-bottom: 3px solid var(--fpu-naranja);
 }
 .hero .container {
   max-width: 900px;
   margin: 0 auto;
-  padding: 2.5rem 1.5rem 3rem;
   text-align: center;
-}
-.hero-eyebrow {
-  display: inline-block;
-  background: var(--fpu-verde-claro);
-  color: var(--fpu-verde-oscuro);
-  border: 1px solid var(--fpu-verde);
-  padding: 0.3rem 0.8rem;
-  border-radius: 999px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: 1.1rem;
+  padding: 2rem 1.5rem 2.25rem;
 }
 .hero-texto h1 {
-  font-size: clamp(1.85rem, 4.5vw, 2.85rem);
+  font-size: clamp(1.65rem, 3.6vw, 2.3rem);
   font-weight: 800;
-  line-height: 1.15;
-  margin: 0 0 0.85rem;
+  line-height: 1.2;
+  margin: 0 0 0.7rem;
   color: var(--aei-azul);
-  letter-spacing: -0.01em;
 }
-.hero-texto h1 span {
-  color: var(--fpu-verde-oscuro);
-  position: relative;
-  white-space: nowrap;
-}
-.hero-texto h1 span::after {
-  content: "";
-  position: absolute;
-  bottom: -0.1em;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--fpu-verde);
-  border-radius: 2px;
-  opacity: 0.5;
-}
+.hero-texto h1 span { color: var(--fpu-naranja); }
 .hero-texto p {
-  font-size: 1.1rem;
-  color: var(--texto-principal);
-  margin: 0 auto 1.5rem;
-  line-height: 1.65;
-  max-width: 700px;
+  font-size: 1.05rem;
+  color: var(--aei-azul-oscuro);
+  margin: 0 auto 1.25rem;
+  line-height: 1.6;
+  max-width: 640px;
 }
 .hero-botones {
   display: flex;
-  gap: 0.85rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 1.5rem;
 }
-.hero-mini-stats {
-  margin-top: 1.25rem;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.4rem 0.85rem;
-  font-size: 0.92rem;
-  color: var(--texto-secundario);
-}
-.hero-mini-stats strong { color: var(--aei-azul); font-weight: 700; }
-.hero-mini-stats .sep { color: var(--fpu-verde); }
 @media (max-width: 600px) {
-  .hero-banner { height: 130px; }
-  .hero .container { padding: 1.75rem 1rem 2rem; }
+  .hero::before { height: 110px; }
+  .hero .container { padding: 1.5rem 1rem 1.75rem; }
 }
 
 /* --- Datos clave (cuadrícula 2×2 por defecto) --- */
@@ -290,7 +247,7 @@
   padding: 1.25rem;
   text-align: center;
   box-shadow: var(--sombra-suave);
-  border-top: 4px solid var(--fpu-verde);
+  border-top: 4px solid var(--fpu-naranja);
 }
 .dato-numero {
   font-size: 2rem;
@@ -317,7 +274,7 @@
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--aei-azul), var(--fpu-verde));
+  background: linear-gradient(90deg, var(--aei-azul), var(--fpu-naranja));
   border-radius: var(--radio-borde) var(--radio-borde) 0 0;
 }
 .novedad-item {
@@ -325,7 +282,7 @@
   gap: 1rem;
   padding: 1.25rem 0;
   border-bottom: 1px solid var(--borde-suave);
-  align-items: flex-start;
+  align-items: center;
 }
 .novedad-item:last-child { border-bottom: none; }
 .novedad-icono {
@@ -341,12 +298,30 @@
   font-weight: 700;
   font-size: 1.1rem;
 }
+.novedad-texto {
+  flex: 1 1 auto;
+}
 .novedad-texto h3 {
   color: var(--aei-azul);
   font-size: 1.15rem;
   margin: 0 0 0.4rem;
 }
 .novedad-texto p { margin: 0; color: var(--texto-secundario); }
+.novedad-img {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fpu-naranja-claro);
+  border-radius: 12px;
+  padding: 10px;
+}
+.novedad-img img { width: 100%; height: 100%; display: block; }
+@media (max-width: 600px) {
+  .novedad-img { width: 56px; height: 56px; padding: 6px; }
+}
 
 /* --- CTA destacada: buscador de grupos / personas expertas --- */
 .cta-buscador {
@@ -367,11 +342,11 @@
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 5px;
-  background: var(--fpu-verde);
+  background: var(--fpu-naranja);
 }
 .cta-buscador-tag {
   display: inline-block;
-  background: var(--fpu-verde);
+  background: var(--fpu-naranja);
   color: var(--texto-claro);
   padding: 0.2rem 0.7rem;
   border-radius: 4px;
@@ -393,12 +368,12 @@
   line-height: 1.6;
 }
 .cta-buscador p:last-of-type { margin-bottom: 1.25rem; }
-.cta-buscador strong { color: var(--fpu-verde-claro); font-weight: 700; }
+.cta-buscador strong { color: var(--fpu-naranja-claro); font-weight: 700; }
 .cta-buscador .btn-fpu {
-  background: var(--fpu-verde);
+  background: var(--fpu-naranja);
   color: var(--texto-claro);
 }
-.cta-buscador .btn-fpu:hover { background: var(--fpu-verde-oscuro); }
+.cta-buscador .btn-fpu:hover { background: var(--fpu-naranja-oscuro); }
 .cta-buscador-icono {
   font-size: 6rem;
   line-height: 1;
@@ -414,7 +389,7 @@
 /* --- Aviso "Próximamente" (página buscador-grupos) --- */
 .aviso-proximamente {
   background: var(--fondo-blanco);
-  border-left: 5px solid var(--fpu-verde);
+  border-left: 5px solid var(--fpu-naranja);
   border-radius: var(--radio-borde);
   padding: 1.75rem 2rem;
   box-shadow: var(--sombra-suave);
@@ -428,7 +403,7 @@
 .aviso-proximamente p:last-child { margin-bottom: 0; }
 .aviso-tag {
   display: inline-block;
-  background: var(--fpu-verde);
+  background: var(--fpu-naranja);
   color: var(--texto-claro);
   padding: 0.18rem 0.65rem;
   border-radius: 4px;
@@ -453,7 +428,7 @@
   border-left: 4px solid var(--aei-azul);
   flex-wrap: wrap;
 }
-.convocatoria-card.vigente { border-left-color: var(--fpu-verde); }
+.convocatoria-card.vigente { border-left-color: var(--fpu-naranja); }
 .convocatoria-info h3 { margin: 0; font-size: 1.05rem; color: var(--aei-azul); }
 .convocatoria-info .anio {
   display: inline-block;
@@ -470,7 +445,7 @@
   font-size: 0.85rem;
   color: var(--texto-secundario);
 }
-.convocatoria-info .estado.abierta { color: var(--fpu-verde-oscuro); font-weight: 600; }
+.convocatoria-info .estado.abierta { color: var(--fpu-naranja-oscuro); font-weight: 600; }
 
 /* --- Sección con imagen --- */
 .seccion-con-imagen {
@@ -483,6 +458,79 @@
   width: 100%;
   border-radius: var(--radio-borde);
   box-shadow: var(--sombra-suave);
+}
+
+/* --- Fechas clave (cards con fecha grande + descripción) --- */
+.fechas-clave {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+.fecha-card {
+  background: var(--fondo-blanco);
+  border-radius: var(--radio-borde);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--sombra-suave);
+  border-left: 5px solid var(--fpu-naranja);
+  position: relative;
+}
+.fecha-card .badge {
+  display: inline-block;
+  background: var(--fpu-naranja-claro);
+  color: var(--fpu-naranja-oscuro);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.6rem;
+}
+.fecha-card .fecha-grande {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--aei-azul);
+  line-height: 1.15;
+  margin: 0 0 0.35rem;
+}
+.fecha-card p {
+  margin: 0;
+  color: var(--texto-secundario);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.aviso-fechas {
+  background: var(--aei-azul-claro);
+  border-left: 4px solid var(--aei-azul);
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radio-borde);
+  color: var(--aei-azul-oscuro);
+  font-size: 0.92rem;
+  margin-top: 1rem;
+}
+
+/* --- Foto principal (panorámica con joven investigador/a) --- */
+.foto-jovenes {
+  margin: 0 0 2rem;
+  border-radius: var(--radio-borde);
+  overflow: hidden;
+  box-shadow: var(--sombra-suave);
+  background: var(--aei-azul-claro);
+}
+.foto-jovenes img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 360px;
+  object-fit: cover;
+}
+.foto-jovenes figcaption {
+  background: var(--fondo-blanco);
+  color: var(--texto-secundario);
+  font-size: 0.85rem;
+  padding: 0.6rem 1rem;
+  text-align: center;
+  font-style: italic;
 }
 
 /* --- Placeholder de imagen pendiente (mientras decidimos la foto definitiva) --- */
@@ -563,7 +611,7 @@
 .acordeon-header::after {
   content: "+";
   font-size: 1.5rem;
-  color: var(--fpu-verde);
+  color: var(--fpu-naranja);
   transition: transform var(--transicion);
 }
 .acordeon-header.activo::after { content: "−"; }
@@ -582,7 +630,62 @@
   margin-top: 2rem;
   padding: 1.5rem 1rem;
 }
-.
+.banner-cofinanciacion .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+}
+.cofinanciacion-texto {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--texto-secundario);
+  line-height: 1.5;
+}
+
+/* --- Utilidades --- */
+.text-center { text-align: center; }
+.text-azul { color: var(--aei-azul); }
+.text-verde { color: var(--fpu-naranja-oscuro); }
+.bg-blanco { background: var(--fondo-blanco); }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .seccion-con-imagen { grid-template-columns: 1fr; }
+}
+@media (max-width: 768px) {
+  .nav-toggle { display: block; }
+  .nav-principal ul {
+    display: none;
+    flex-direction: column;
+    width: 100%;
+  }
+  .nav-principal ul.nav-open { display: flex; }
+  .nav-principal .container { flex-wrap: wrap; }
+  .nav-principal li a {
+    padding: 0.75rem 1rem;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+  }
+  .tarjetas-grid { grid-template-columns: 1fr; }
+  .datos-clave { grid-template-columns: 1fr; }
+  .seccion-titulo { font-size: 1.4rem; }
+  .hero-texto h1 { font-size: 1.85rem; }
+  .hero { padding: 2.5rem 1rem; }
+}
+@media (max-width: 480px) {
+  .btn-aei, .btn-fpu, .btn-fpu-outline {
+    display: block;
+    text-align: center;
+    width: 100%;
+  }
+}
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
 </style>
 <!-- ===== CSS:END ===== -->
 
@@ -591,13 +694,11 @@
     <div class="container">
       <button aria-expanded="false" aria-label="Abrir menú" class="nav-toggle">☰</button>
       <ul id="nav-menu">
-        <li><a class="active" href="index.html">Inicio FPU</a></li>
-        <li><a href="novedades-2026.html">Novedades 2026</a></li>
-        <li><a href="convocatoria.html">Convocatoria</a></li>
-        <li><a href="areas-tematicas.html">Áreas temáticas</a></li>
-        <li><a href="buscador-grupos.html">Buscador de grupos</a></li>
-        <li><a class="nav-destacado" href="novedades-2026.html">Novedades 2026</a></li>
-      </ul>
+                <li><a class="active" href="index.html">Inicio</a></li>
+                <li><a href="doctorandos.html">Si eres doctorando</a></li>
+                <li><a href="centros.html">Si eres centro</a></li>
+                <li><a href="buscador-grupos.html">Buscador de grupos</a></li>
+              </ul>
     </div>
   </nav>
 
@@ -612,116 +713,52 @@
 
   <!-- ===== HERO / BANNER ===== -->
   <section class="hero">
-    <div class="hero-banner" aria-hidden="true"></div>
     <div class="container">
       <div class="hero-texto">
-        <span class="hero-eyebrow">Convocatoria 2026 · Primera AEI</span>
-        <h1>Empieza tu carrera investigadora con <span>FPU</span></h1>
-        <p>Cuatro años de contrato predoctoral, formación docente y un periodo de orientación posdoctoral. <strong>Tú eliges</strong> la universidad o el centro de I+D donde dar tus primeros pasos en la investigación.</p>
+        <h1>Programa <span>FPU</span> 2026</h1>
+        <p>Formación de Profesorado Universitario. Contratos predoctorales para futuras y futuros doctores que combinan investigación de excelencia con formación docente. Por primera vez gestionada por la <strong>Agencia Estatal de Investigación</strong>.</p>
         <div class="hero-botones">
-          <a class="btn-fpu" href="convocatoria.html">Cómo participar</a>
-          <a class="btn-fpu-outline" href="novedades-2026.html">Ver novedades 2026 →</a>
-        </div>
-        <div class="hero-mini-stats">
-          <span><strong>140.350 €</strong> por ayuda</span>
-          <span class="sep">●</span>
-          <span><strong>4 años</strong> de contrato</span>
-          <span class="sep">●</span>
-          <span><strong>+12 meses</strong> POP</span>
-          <span class="sep">●</span>
-          <span><strong>50+</strong> subáreas AEI</span>
+          <a class="btn-fpu" href="doctorandos.html">Si eres doctorando</a>
+          <a class="btn-fpu-outline" href="centros.html">Si eres centro</a>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- ===== CINTA DE STATS RÁPIDOS ===== -->
-  <section class="cinta-stats" aria-label="Datos clave de la convocatoria">
-    <div class="container">
-      <div class="cinta-stat"><span class="num">4 años</span><span class="lab">Duración del contrato</span></div>
-      <div class="cinta-stat"><span class="num">+12 meses</span><span class="lab">Orientación posdoctoral</span></div>
-      <div class="cinta-stat"><span class="num">140.350 €</span><span class="lab">Cuantía total</span></div>
-      <div class="cinta-stat"><span class="num">90 h</span><span class="lab">Mínimo docencia</span></div>
     </div>
   </section>
 
   <main>
 
-    <!-- ===== ¿POR QUÉ FPU? ===== -->
-    <section class="seccion">
-      <h2 class="seccion-titulo">¿Por qué hacer una FPU?</h2>
-      <div class="razones-grid">
-        <div class="razon">
-          <div class="razon-icono"><img src="assets/ilustraciones/contrato.svg" alt=""></div>
-          <h3>Contrato laboral predoctoral</h3>
-          <p>Cuatro años de contrato indefinido predoctoral con salario, cotización a la Seguridad Social e indemnización al final.</p>
-        </div>
-        <div class="razon">
-          <div class="razon-icono"><img src="assets/ilustraciones/universidad.svg" alt=""></div>
-          <h3>Tú eliges dónde investigar</h3>
-          <p>Universidad o centro de I+D. Decide con quién quieres trabajar y prepara la candidatura conjuntamente con tu grupo.</p>
-        </div>
-        <div class="razon">
-          <div class="razon-icono"><img src="assets/ilustraciones/birrete.svg" alt=""></div>
-          <h3>Formación docente real</h3>
-          <p>Mínimo 90 h de colaboración docente universitaria durante el contrato. Sales con experiencia investigadora y docente.</p>
-        </div>
-        <div class="razon">
-          <div class="razon-icono"><img src="assets/ilustraciones/globo.svg" alt=""></div>
-          <h3>Estancias internacionales</h3>
-          <p>Gastos de estancias en centros de I+D ya incluidos en la ayuda. Salir fuera ya no necesita una convocatoria aparte.</p>
-        </div>
-        <div class="razon">
-          <div class="razon-icono"><img src="assets/ilustraciones/lab.svg" alt=""></div>
-          <h3>Orientación posdoctoral (POP)</h3>
-          <p>Hasta 12 meses adicionales tras la tesis para perfeccionamiento profesional, sin tener que cambiar de programa.</p>
-        </div>
-        <div class="razon">
-          <div class="razon-icono"><img src="assets/ilustraciones/moneda.svg" alt=""></div>
-          <h3>140.350 € de financiación</h3>
-          <p>Sueldo + indemnización + estancias + matrícula del doctorado. Todo en una única ayuda.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ===== TU CAMINO CON FPU ===== -->
-    <section class="seccion">
-      <h2 class="seccion-titulo">Tu camino con FPU</h2>
-      <div class="timeline-fpu">
-        <div class="timeline-item">
-          <div class="timeline-marker">0</div>
-          <h3>Antes de solicitar</h3>
-          <p>Identificas el grupo de investigación con el que quieres trabajar (te ayudará el <a href="buscador-grupos.html">buscador de grupos</a> cuando esté disponible). Te acreditas en el Registro Unificado de Solicitantes (RUS).</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-marker">1</div>
-          <h3>Año 1 — Arranque</h3>
-          <p>Incorporación al centro y matrícula en el programa de doctorado. Empiezan las tareas docentes y el plan de tesis.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-marker">2</div>
-          <h3>Año 2 — Consolidación</h3>
-          <p>Avance en la tesis. Primer informe de seguimiento entre los meses 20 y 21 (clave para la continuidad).</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-marker">3</div>
-          <h3>Año 3 — Producción científica y estancia</h3>
-          <p>Publicaciones, congresos y, si encaja, estancia internacional. Las tareas docentes ya están integradas en tu rutina.</p>
-        </div>
-        <div class="timeline-item">
-          <div class="timeline-marker">4</div>
-          <h3>Año 4 — Tesis + POP</h3>
-          <p>Lectura de la tesis. Empieza el periodo de orientación posdoctoral (hasta 12 meses dentro de la ayuda) para definir tu siguiente paso.</p>
-        </div>
-      </div>
-    </section>
+    <!-- ===== FOTO PRINCIPAL ===== -->
+    <figure class="foto-jovenes">
+      <img src="assets/fotos/foto-jovenes-investigadores.jpg" alt="Jóvenes investigadoras e investigadores trabajando en equipo">
+    </figure>
 
     <!-- ===== ¿QUÉ ES FPU? ===== -->
     <section class="seccion">
       <h2 class="seccion-titulo">¿Qué es el Programa FPU?</h2>
-      <p>Las ayudas para la <strong>Formación de Profesorado Universitario (FPU)</strong> financian contratos predoctorales para que el personal investigador en formación realice una tesis doctoral y, a la vez, adquiera las competencias docentes universitarias necesarias para incorporarse al sistema de educación superior.</p>
-      <p>Iniciado en los años 90 por el Ministerio de Educación, en <strong>2026 el programa pasa a estar gestionado por la Agencia Estatal de Investigación (AEI)</strong>, en virtud del Real Decreto 265/2026 de 1 de abril. El objetivo: unificar la gestión de las ayudas a la formación de doctores, simplificar el procedimiento y alinear FPU con los procesos consolidados de la AEI.</p>
-      <a class="btn-aei mt-2" href="convocatoria.html">Ver detalles de la convocatoria</a>
+      <p>Las ayudas para la <strong>Formación de Profesorado Universitario (FPU)</strong> tienen como finalidad la formación de doctores y doctoras mediante la financiación de contratos predoctorales, de modo que el personal investigador en formación realice una tesis doctoral y, al mismo tiempo, adquiera las competencias docentes universitarias necesarias para incorporarse al sistema de educación superior.</p>
+      <p>Iniciado en los años 90 por el Ministerio de Educación, el programa FPU pasa en 2026 a estar gestionado por la <strong>Agencia Estatal de Investigación (AEI)</strong>, en virtud del Real Decreto 265/2026, de 1 de abril. La integración tiene como objetivo unificar la gestión de las ayudas a la formación de doctores del Ministerio de Ciencia, Innovación y Universidades, simplificar el procedimiento y alinear FPU con los procesos consolidados de la AEI.</p>
+      <div class="datos-clave">
+        <div class="dato-item">
+          <div class="dato-numero">4</div>
+          <div class="dato-label">Años de duración del contrato</div>
+        </div>
+        <div class="dato-item">
+          <div class="dato-numero">+12</div>
+          <div class="dato-label">Meses de orientación posdoctoral (POP)</div>
+        </div>
+        <div class="dato-item">
+          <div class="dato-numero">140.350&nbsp;€</div>
+          <div class="dato-label">Cuantía total por ayuda</div>
+        </div>
+        <div class="dato-item">
+          <div class="dato-numero">90&nbsp;h</div>
+          <div class="dato-label">Mínimo de docencia universitaria</div>
+        </div>
+      </div>
+      <div class="hero-botones mt-2">
+        <a class="btn-fpu" href="doctorandos.html">Si eres doctorando</a>
+        <a class="btn-fpu-outline" href="centros.html">Si eres centro</a>
+      </div>
     </section>
 
     <!-- ===== NOVEDADES DESTACADAS ===== -->
@@ -734,6 +771,7 @@
             <h3>Gestión integrada en la AEI</h3>
             <p>FPU pasa a gestionarse desde la Agencia Estatal de Investigación. Se alinean tramitación, evaluación y seguimiento con el resto de convocatorias predoctorales y posdoctorales de la AEI.</p>
           </div>
+          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/institucional.svg" alt=""></div>
         </div>
         <div class="novedad-item">
           <div class="novedad-icono">2</div>
@@ -741,6 +779,7 @@
             <h3>Solicitud presentada por el centro de I+D</h3>
             <p>Las solicitudes ya no las presenta la persona candidata, sino el Centro de I+D donde se vaya a desarrollar la tesis. Se mantiene la cumplimentación telemática del formulario por parte de la persona participante en el Registro Unificado de Solicitantes (RUS).</p>
           </div>
+          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/formulario.svg" alt=""></div>
         </div>
         <div class="novedad-item">
           <div class="novedad-icono">3</div>
@@ -748,6 +787,7 @@
             <h3>Requisitos más flexibles para participantes</h3>
             <p>Pueden solicitar la ayuda quienes estén matriculadas/admitidas o en disposición de estarlo a la firma del contrato. Desaparecen los requisitos de fecha de finalización de los estudios previos.</p>
           </div>
+          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/persona-check.svg" alt=""></div>
         </div>
         <div class="novedad-item">
           <div class="novedad-icono">4</div>
@@ -755,6 +795,7 @@
             <h3>Ampliación de quién puede dirigir tesis</h3>
             <p>Se reconocen explícitamente las personas Ramón y Cajal, certificados I3/R3 de programas posdoctorales del Plan Estatal y la expectativa de nombramiento tras un proceso selectivo público que exija el grado de doctor/a.</p>
           </div>
+          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/personas.svg" alt=""></div>
         </div>
         <div class="novedad-item">
           <div class="novedad-icono">5</div>
@@ -762,6 +803,7 @@
             <h3>Nuevos criterios de evaluación (75 + 25)</h3>
             <p>Expediente académico ponderado hasta 75 puntos (umbral 60). Calidad y trayectoria del equipo hasta 25 puntos: 10 trayectoria del/de la director/a de tesis y 15 contexto científico-técnico y formativo del grupo.</p>
           </div>
+          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/evaluacion.svg" alt=""></div>
         </div>
         <div class="novedad-item">
           <div class="novedad-icono">6</div>
@@ -769,6 +811,7 @@
             <h3>Periodo de orientación posdoctoral (POP)</h3>
             <p>Dentro de los 4 años de duración máxima de la ayuda se incluye un periodo de hasta 12 meses tras la obtención del título de doctor/a, destinado al perfeccionamiento y especialización profesional.</p>
           </div>
+          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/pop.svg" alt=""></div>
         </div>
         <div class="novedad-item">
           <div class="novedad-icono">7</div>
@@ -776,6 +819,7 @@
             <h3>Gastos elegibles más amplios</h3>
             <p>Se incluyen en una única ayuda los gastos de contratación, indemnización por finalización, estancias en centros de I+D y matrícula del programa de doctorado. Desaparece la convocatoria adicional de estancias.</p>
           </div>
+          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/moneda.svg" alt=""></div>
         </div>
         <div class="novedad-item">
           <div class="novedad-icono">8</div>
@@ -783,12 +827,15 @@
             <h3>Seguimiento simplificado</h3>
             <p>Solo dos informes científico-técnicos: intermedio (mes 20–21) y final (mes siguiente al fin de la ayuda). Desaparece el informe anual. La evaluación del informe intermedio condiciona la continuidad de la financiación.</p>
           </div>
+          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/seguimiento.svg" alt=""></div>
         </div>
       </div>
-      <div class="mt-3 text-center">
-        <a class="btn-aei" href="novedades-2026.html">Ver todas las novedades en detalle</a>
-      </div>
     </section>
+
+    <!-- ===== FOTO INTERMEDIA ===== -->
+    <figure class="foto-jovenes">
+      <img src="assets/fotos/foto-novedades.jpg" alt="Jóvenes investigadoras e investigadores trabajando en torno a una mesa con portátiles">
+    </figure>
 
     <!-- ===== CUANTÍA Y GASTOS ===== -->
     <section class="seccion">
@@ -836,6 +883,29 @@
       </div>
     </section>
 
+    <!-- ===== FECHAS CLAVE ===== -->
+    <section class="seccion">
+      <h2 class="seccion-titulo">Fechas clave de la convocatoria 2026</h2>
+      <div class="fechas-clave">
+        <div class="fecha-card">
+          <span class="badge">Solicitud</span>
+          <div class="fecha-grande">1 – 30 oct. 2026</div>
+          <p>Periodo de presentación de solicitudes. Las presenta el centro de I+D vía registro electrónico de la AEI.</p>
+        </div>
+        <div class="fecha-card">
+          <span class="badge">Resolución provisional</span>
+          <div class="fecha-grande">Junio 2027</div>
+          <p>Publicación de la Propuesta de Resolución Provisional (PRP) con las candidaturas seleccionadas y reservas.</p>
+        </div>
+        <div class="fecha-card">
+          <span class="badge">Inicio de contratos</span>
+          <div class="fecha-grande">Septiembre 2027</div>
+          <p>Incorporación efectiva del personal investigador a los centros de I+D.</p>
+        </div>
+      </div>
+      <p class="aviso-fechas">⚠️ Fechas orientativas. Se confirmarán en el momento de la publicación oficial de la convocatoria en el BOE.</p>
+    </section>
+
     <!-- ===== CONVOCATORIAS RECIENTES ===== -->
     <section class="seccion">
       <h2 class="seccion-titulo">Convocatoria 2026 y anteriores</h2>
@@ -844,7 +914,7 @@
           <h3><span class="anio">2026</span> Convocatoria FPU 2026 — Primera convocatoria gestionada por la AEI</h3>
           <div class="estado abierta">Próxima publicación · Borrador en tramitación</div>
         </div>
-        <a class="btn-fpu" href="novedades-2026.html">Ver novedades</a>
+        
       </div>
       <div class="convocatoria-card">
         <div class="convocatoria-info">
@@ -885,11 +955,6 @@
           <h3>Registro Unificado de Solicitantes (RUS)</h3>
           <p>Inscripción previa de personas investigadoras y representantes legales para presentar solicitudes en la AEI.</p>
           <a class="btn-fpu-outline" href="https://www.aei.gob.es/" target="_blank" rel="noopener">Más información</a>
-        </div>
-        <div class="tarjeta">
-          <h3>Plan Estatal 2024–2027</h3>
-          <p>Plan Estatal de Investigación Científica, Técnica y de Innovación que enmarca las ayudas FPU.</p>
-          <a class="btn-fpu-outline" href="https://www.aei.gob.es/" target="_blank" rel="noopener">Documentación</a>
         </div>
         <div class="tarjeta">
           <h3>Real Decreto 265/2026</h3>
@@ -970,3 +1035,4 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
 </body>
 </html>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            

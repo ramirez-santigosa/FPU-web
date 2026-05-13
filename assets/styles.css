@@ -1,15 +1,15 @@
 /* ==========================================================================
    ESTILOS GLOBALES — Web Convocatoria FPU 2026 (AEI)
-   Paleta inspirada en la web RYC pero con acento verde para FPU
+   Paleta: azul AEI + acento naranja FPU
    ========================================================================== */
 
 :root {
   --aei-azul: #1b4c96;
   --aei-azul-oscuro: #143a73;
   --aei-azul-claro: #dae3f3;
-  --fpu-verde: #2db26a;
-  --fpu-verde-oscuro: #1f8a4f;
-  --fpu-verde-claro: #d6f0e2;
+  --fpu-naranja: #e87722;
+  --fpu-naranja-oscuro: #b85e15;
+  --fpu-naranja-claro: #fce4ce;
   --fondo-claro: #f0f4fa;
   --fondo-blanco: #ffffff;
   --texto-principal: #333333;
@@ -28,15 +28,12 @@
 }
 .fpu-page { scroll-behavior: smooth; }
 .fpu-page {
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-feature-settings: "cv11", "ss01";
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   color: var(--texto-principal);
   background-color: var(--fondo-claro);
   line-height: 1.6;
   margin: 0;
   padding: 0;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
 }
 :where(.fpu-page) img { max-width: 100%; height: auto; }
 :where(.fpu-page) a {
@@ -78,12 +75,12 @@
   text-decoration: none;
 }
 .nav-principal li a.nav-destacado {
-  background: var(--fpu-verde);
+  background: var(--fpu-naranja);
   color: var(--texto-claro);
   font-weight: 600;
 }
 .nav-principal li a.nav-destacado:hover {
-  background: var(--fpu-verde-oscuro);
+  background: var(--fpu-naranja-oscuro);
 }
 .nav-toggle {
   display: none;
@@ -116,7 +113,7 @@
   color: var(--aei-azul);
   margin-bottom: 1.5rem;
   padding-bottom: 0.5rem;
-  border-bottom: 3px solid var(--fpu-verde);
+  border-bottom: 3px solid var(--fpu-naranja);
   font-weight: 700;
 }
 .seccion-subtitulo {
@@ -164,8 +161,8 @@
 }
 .btn-aei { background: var(--aei-azul); color: var(--texto-claro); }
 .btn-aei:hover { background: var(--aei-azul-oscuro); color: var(--texto-claro); text-decoration: none; }
-.btn-fpu { background: var(--fpu-verde); color: var(--texto-claro); }
-.btn-fpu:hover { background: var(--fpu-verde-oscuro); color: var(--texto-claro); text-decoration: none; }
+.btn-fpu { background: var(--fpu-naranja); color: var(--texto-claro); }
+.btn-fpu:hover { background: var(--fpu-naranja-oscuro); color: var(--texto-claro); text-decoration: none; }
 .btn-fpu-outline {
   background: transparent;
   color: var(--aei-azul);
@@ -177,91 +174,51 @@
   text-decoration: none;
 }
 
-/* --- Hero / Banner: franja decorativa arriba, texto sobre fondo limpio abajo --- */
+/* --- Hero / Banner: franja superior con la imagen, texto debajo sobre fondo limpio --- */
 .hero {
   background: var(--aei-azul-claro);
   color: var(--texto-principal);
-  padding: 0;
   position: relative;
   overflow: hidden;
 }
-.hero-banner {
+.hero::before {
+  content: "";
+  display: block;
   width: 100%;
-  height: 200px;
+  height: 160px;
   background: url('assets/banner-fpu.png') center / cover no-repeat;
-  border-bottom: 4px solid var(--fpu-verde);
+  border-bottom: 3px solid var(--fpu-naranja);
 }
 .hero .container {
   max-width: 900px;
   margin: 0 auto;
-  padding: 2.5rem 1.5rem 3rem;
   text-align: center;
-}
-.hero-eyebrow {
-  display: inline-block;
-  background: var(--fpu-verde-claro);
-  color: var(--fpu-verde-oscuro);
-  border: 1px solid var(--fpu-verde);
-  padding: 0.3rem 0.8rem;
-  border-radius: 999px;
-  font-size: 0.78rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-  margin-bottom: 1.1rem;
+  padding: 2rem 1.5rem 2.25rem;
 }
 .hero-texto h1 {
-  font-size: clamp(1.85rem, 4.5vw, 2.85rem);
+  font-size: clamp(1.65rem, 3.6vw, 2.3rem);
   font-weight: 800;
-  line-height: 1.15;
-  margin: 0 0 0.85rem;
+  line-height: 1.2;
+  margin: 0 0 0.7rem;
   color: var(--aei-azul);
-  letter-spacing: -0.01em;
 }
-.hero-texto h1 span {
-  color: var(--fpu-verde-oscuro);
-  position: relative;
-  white-space: nowrap;
-}
-.hero-texto h1 span::after {
-  content: "";
-  position: absolute;
-  bottom: -0.1em;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: var(--fpu-verde);
-  border-radius: 2px;
-  opacity: 0.5;
-}
+.hero-texto h1 span { color: var(--fpu-naranja); }
 .hero-texto p {
-  font-size: 1.1rem;
-  color: var(--texto-principal);
-  margin: 0 auto 1.5rem;
-  line-height: 1.65;
-  max-width: 700px;
+  font-size: 1.05rem;
+  color: var(--aei-azul-oscuro);
+  margin: 0 auto 1.25rem;
+  line-height: 1.6;
+  max-width: 640px;
 }
 .hero-botones {
   display: flex;
-  gap: 0.85rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
   justify-content: center;
-  margin-bottom: 1.5rem;
 }
-.hero-mini-stats {
-  margin-top: 1.25rem;
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 0.4rem 0.85rem;
-  font-size: 0.92rem;
-  color: var(--texto-secundario);
-}
-.hero-mini-stats strong { color: var(--aei-azul); font-weight: 700; }
-.hero-mini-stats .sep { color: var(--fpu-verde); }
 @media (max-width: 600px) {
-  .hero-banner { height: 130px; }
-  .hero .container { padding: 1.75rem 1rem 2rem; }
+  .hero::before { height: 110px; }
+  .hero .container { padding: 1.5rem 1rem 1.75rem; }
 }
 
 /* --- Datos clave (cuadrícula 2×2 por defecto) --- */
@@ -277,7 +234,7 @@
   padding: 1.25rem;
   text-align: center;
   box-shadow: var(--sombra-suave);
-  border-top: 4px solid var(--fpu-verde);
+  border-top: 4px solid var(--fpu-naranja);
 }
 .dato-numero {
   font-size: 2rem;
@@ -304,7 +261,7 @@
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 4px;
-  background: linear-gradient(90deg, var(--aei-azul), var(--fpu-verde));
+  background: linear-gradient(90deg, var(--aei-azul), var(--fpu-naranja));
   border-radius: var(--radio-borde) var(--radio-borde) 0 0;
 }
 .novedad-item {
@@ -312,7 +269,7 @@
   gap: 1rem;
   padding: 1.25rem 0;
   border-bottom: 1px solid var(--borde-suave);
-  align-items: flex-start;
+  align-items: center;
 }
 .novedad-item:last-child { border-bottom: none; }
 .novedad-icono {
@@ -328,12 +285,30 @@
   font-weight: 700;
   font-size: 1.1rem;
 }
+.novedad-texto {
+  flex: 1 1 auto;
+}
 .novedad-texto h3 {
   color: var(--aei-azul);
   font-size: 1.15rem;
   margin: 0 0 0.4rem;
 }
 .novedad-texto p { margin: 0; color: var(--texto-secundario); }
+.novedad-img {
+  flex-shrink: 0;
+  width: 72px;
+  height: 72px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--fpu-naranja-claro);
+  border-radius: 12px;
+  padding: 10px;
+}
+.novedad-img img { width: 100%; height: 100%; display: block; }
+@media (max-width: 600px) {
+  .novedad-img { width: 56px; height: 56px; padding: 6px; }
+}
 
 /* --- CTA destacada: buscador de grupos / personas expertas --- */
 .cta-buscador {
@@ -354,11 +329,11 @@
   position: absolute;
   top: 0; left: 0; right: 0;
   height: 5px;
-  background: var(--fpu-verde);
+  background: var(--fpu-naranja);
 }
 .cta-buscador-tag {
   display: inline-block;
-  background: var(--fpu-verde);
+  background: var(--fpu-naranja);
   color: var(--texto-claro);
   padding: 0.2rem 0.7rem;
   border-radius: 4px;
@@ -380,12 +355,12 @@
   line-height: 1.6;
 }
 .cta-buscador p:last-of-type { margin-bottom: 1.25rem; }
-.cta-buscador strong { color: var(--fpu-verde-claro); font-weight: 700; }
+.cta-buscador strong { color: var(--fpu-naranja-claro); font-weight: 700; }
 .cta-buscador .btn-fpu {
-  background: var(--fpu-verde);
+  background: var(--fpu-naranja);
   color: var(--texto-claro);
 }
-.cta-buscador .btn-fpu:hover { background: var(--fpu-verde-oscuro); }
+.cta-buscador .btn-fpu:hover { background: var(--fpu-naranja-oscuro); }
 .cta-buscador-icono {
   font-size: 6rem;
   line-height: 1;
@@ -401,7 +376,7 @@
 /* --- Aviso "Próximamente" (página buscador-grupos) --- */
 .aviso-proximamente {
   background: var(--fondo-blanco);
-  border-left: 5px solid var(--fpu-verde);
+  border-left: 5px solid var(--fpu-naranja);
   border-radius: var(--radio-borde);
   padding: 1.75rem 2rem;
   box-shadow: var(--sombra-suave);
@@ -415,7 +390,7 @@
 .aviso-proximamente p:last-child { margin-bottom: 0; }
 .aviso-tag {
   display: inline-block;
-  background: var(--fpu-verde);
+  background: var(--fpu-naranja);
   color: var(--texto-claro);
   padding: 0.18rem 0.65rem;
   border-radius: 4px;
@@ -440,7 +415,7 @@
   border-left: 4px solid var(--aei-azul);
   flex-wrap: wrap;
 }
-.convocatoria-card.vigente { border-left-color: var(--fpu-verde); }
+.convocatoria-card.vigente { border-left-color: var(--fpu-naranja); }
 .convocatoria-info h3 { margin: 0; font-size: 1.05rem; color: var(--aei-azul); }
 .convocatoria-info .anio {
   display: inline-block;
@@ -457,7 +432,7 @@
   font-size: 0.85rem;
   color: var(--texto-secundario);
 }
-.convocatoria-info .estado.abierta { color: var(--fpu-verde-oscuro); font-weight: 600; }
+.convocatoria-info .estado.abierta { color: var(--fpu-naranja-oscuro); font-weight: 600; }
 
 /* --- Sección con imagen --- */
 .seccion-con-imagen {
@@ -470,6 +445,79 @@
   width: 100%;
   border-radius: var(--radio-borde);
   box-shadow: var(--sombra-suave);
+}
+
+/* --- Fechas clave (cards con fecha grande + descripción) --- */
+.fechas-clave {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+}
+.fecha-card {
+  background: var(--fondo-blanco);
+  border-radius: var(--radio-borde);
+  padding: 1.25rem 1.5rem;
+  box-shadow: var(--sombra-suave);
+  border-left: 5px solid var(--fpu-naranja);
+  position: relative;
+}
+.fecha-card .badge {
+  display: inline-block;
+  background: var(--fpu-naranja-claro);
+  color: var(--fpu-naranja-oscuro);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.2rem 0.6rem;
+  border-radius: 999px;
+  margin-bottom: 0.6rem;
+}
+.fecha-card .fecha-grande {
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--aei-azul);
+  line-height: 1.15;
+  margin: 0 0 0.35rem;
+}
+.fecha-card p {
+  margin: 0;
+  color: var(--texto-secundario);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+.aviso-fechas {
+  background: var(--aei-azul-claro);
+  border-left: 4px solid var(--aei-azul);
+  padding: 0.85rem 1.1rem;
+  border-radius: var(--radio-borde);
+  color: var(--aei-azul-oscuro);
+  font-size: 0.92rem;
+  margin-top: 1rem;
+}
+
+/* --- Foto principal (panorámica con joven investigador/a) --- */
+.foto-jovenes {
+  margin: 0 0 2rem;
+  border-radius: var(--radio-borde);
+  overflow: hidden;
+  box-shadow: var(--sombra-suave);
+  background: var(--aei-azul-claro);
+}
+.foto-jovenes img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-height: 360px;
+  object-fit: cover;
+}
+.foto-jovenes figcaption {
+  background: var(--fondo-blanco);
+  color: var(--texto-secundario);
+  font-size: 0.85rem;
+  padding: 0.6rem 1rem;
+  text-align: center;
+  font-style: italic;
 }
 
 /* --- Placeholder de imagen pendiente (mientras decidimos la foto definitiva) --- */
@@ -550,7 +598,7 @@
 .acordeon-header::after {
   content: "+";
   font-size: 1.5rem;
-  color: var(--fpu-verde);
+  color: var(--fpu-naranja);
   transition: transform var(--transicion);
 }
 .acordeon-header.activo::after { content: "−"; }
@@ -584,172 +632,10 @@
   line-height: 1.5;
 }
 
-/* --- "Por qué FPU": cards con icono SVG --- */
-.razones-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1.25rem;
-}
-.razon {
-  background: var(--fondo-blanco);
-  border-radius: var(--radio-borde);
-  padding: 1.5rem 1.25rem;
-  box-shadow: var(--sombra-suave);
-  position: relative;
-  transition: transform var(--transicion), box-shadow var(--transicion);
-  border-top: 3px solid var(--fpu-verde);
-}
-.razon:hover {
-  transform: translateY(-3px);
-  box-shadow: var(--sombra-media);
-}
-.razon-icono {
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: var(--fpu-verde-claro);
-  border-radius: 12px;
-  margin-bottom: 0.85rem;
-}
-.razon-icono svg { width: 32px; height: 32px; }
-.razon h3 {
-  color: var(--aei-azul);
-  font-size: 1.05rem;
-  margin: 0 0 0.4rem;
-  line-height: 1.3;
-}
-.razon p {
-  color: var(--texto-secundario);
-  font-size: 0.95rem;
-  margin: 0;
-  line-height: 1.55;
-}
-
-/* --- Timeline "Tu camino con FPU" --- */
-.timeline-fpu {
-  position: relative;
-  padding: 1rem 0;
-}
-.timeline-fpu::before {
-  content: "";
-  position: absolute;
-  left: 24px;
-  top: 1rem;
-  bottom: 1rem;
-  width: 3px;
-  background: linear-gradient(180deg, var(--aei-azul), var(--fpu-verde));
-  border-radius: 2px;
-}
-.timeline-item {
-  position: relative;
-  padding-left: 64px;
-  padding-bottom: 1.5rem;
-}
-.timeline-item:last-child { padding-bottom: 0; }
-.timeline-marker {
-  position: absolute;
-  left: 8px;
-  top: 0;
-  width: 36px;
-  height: 36px;
-  background: var(--fondo-blanco);
-  border: 3px solid var(--fpu-verde);
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  color: var(--aei-azul);
-  font-size: 0.9rem;
-  box-shadow: 0 0 0 4px var(--fondo-claro);
-}
-.timeline-item h3 {
-  margin: 0 0 0.3rem;
-  color: var(--aei-azul);
-  font-size: 1.1rem;
-}
-.timeline-item p { margin: 0; color: var(--texto-secundario); }
-
-/* --- Cinta de stats horizontal (debajo del hero) --- */
-.cinta-stats {
-  background: var(--fondo-blanco);
-  border-top: 1px solid var(--borde-suave);
-  border-bottom: 1px solid var(--borde-suave);
-}
-.cinta-stats .container {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 1rem 1.5rem;
-  display: flex;
-  justify-content: space-around;
-  flex-wrap: wrap;
-  gap: 0.75rem;
-}
-.cinta-stat {
-  text-align: center;
-  flex: 1 1 140px;
-}
-.cinta-stat .num {
-  display: block;
-  color: var(--aei-azul);
-  font-size: 1.5rem;
-  font-weight: 800;
-  line-height: 1;
-}
-.cinta-stat .lab {
-  display: block;
-  color: var(--texto-secundario);
-  font-size: 0.82rem;
-  margin-top: 0.3rem;
-}
-
-/* --- Testimonio (placeholder ilustrativo) --- */
-.testimonio {
-  background: var(--fondo-blanco);
-  border-left: 5px solid var(--fpu-verde);
-  border-radius: var(--radio-borde);
-  padding: 1.5rem 1.75rem;
-  box-shadow: var(--sombra-suave);
-  font-style: italic;
-  color: var(--texto-principal);
-  position: relative;
-}
-.testimonio::before {
-  content: "\201C";
-  position: absolute;
-  top: -12px;
-  left: 16px;
-  background: var(--fondo-claro);
-  color: var(--fpu-verde);
-  font-size: 3rem;
-  font-family: Georgia, serif;
-  line-height: 1;
-  padding: 0 8px;
-}
-.testimonio-autor {
-  display: block;
-  margin-top: 0.85rem;
-  color: var(--texto-secundario);
-  font-style: normal;
-  font-size: 0.9rem;
-}
-.testimonio-autor strong { color: var(--aei-azul); }
-
-/* --- Animaciones de entrada (sutiles) --- */
-@media (prefers-reduced-motion: no-preference) {
-  .seccion { animation: fadeUp 0.6s ease-out both; }
-}
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
 /* --- Utilidades --- */
 .text-center { text-align: center; }
 .text-azul { color: var(--aei-azul); }
-.text-verde { color: var(--fpu-verde-oscuro); }
+.text-verde { color: var(--fpu-naranja-oscuro); }
 .bg-blanco { background: var(--fondo-blanco); }
 .mt-2 { margin-top: 1rem; }
 .mt-3 { margin-top: 1.5rem; }
@@ -786,3 +672,4 @@
     width: 100%;
   }
 }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
