@@ -190,7 +190,7 @@
   text-decoration: none;
 }
 
-/* --- Hero / Banner: TÍTULO DENTRO del banner entre los iconos; texto+botones debajo --- */
+/* --- Hero: titular + descripción DENTRO del banner; botones debajo --- */
 .hero {
   background: var(--aei-azul-claro);
   color: var(--texto-principal);
@@ -200,42 +200,41 @@
 .hero-banner-area {
   position: relative;
   width: 100%;
-  height: 200px;
+  min-height: 260px;
   background: url('assets/banner-fpu.png') center / cover no-repeat;
   border-bottom: 3px solid var(--fpu-naranja);
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 1.25rem 1rem;
 }
 .hero-titulo-banner {
-  /* máximo 600px y mucho padding lateral para que NUNCA pise los iconos */
-  max-width: 600px;
-  width: calc(100% - 360px);
+  max-width: 720px;
+  width: calc(100% - 380px);
   text-align: center;
-  padding: 0 1rem;
 }
 .hero-titulo-banner h1 {
-  font-size: clamp(1.2rem, 2.2vw, 1.85rem);
+  font-size: clamp(1.65rem, 3vw, 2.45rem);
   font-weight: 800;
-  line-height: 1.15;
-  margin: 0;
+  line-height: 1.12;
+  margin: 0 0 0.7rem;
   color: var(--aei-azul);
-  text-shadow: 0 1px 2px rgba(255,255,255,0.75), 0 0 12px rgba(218,227,243,0.6);
+  text-shadow: 0 1px 2px rgba(255,255,255,0.8), 0 0 14px rgba(218,227,243,0.7);
 }
 .hero-titulo-banner h1 span { color: var(--fpu-naranja); }
-
+.hero-descripcion {
+  font-size: 1rem;
+  color: var(--aei-azul-oscuro);
+  line-height: 1.5;
+  margin: 0;
+  text-shadow: 0 1px 2px rgba(255,255,255,0.8);
+  font-weight: 500;
+}
 .hero-debajo {
   max-width: 900px;
   margin: 0 auto;
   text-align: center;
   padding: 1.5rem 1.5rem 1.75rem;
-}
-.hero-debajo p {
-  font-size: 1.05rem;
-  color: var(--aei-azul-oscuro);
-  margin: 0 auto 1.25rem;
-  line-height: 1.6;
-  max-width: 700px;
 }
 .hero-botones {
   display: flex;
@@ -244,7 +243,7 @@
   justify-content: center;
 }
 
-/* Botón verde (complementario para "Si eres centro" desde otras páginas) */
+/* Botón verde (complementario para "Si eres centro") */
 .btn-verde {
   display: inline-block;
   padding: 0.75rem 1.75rem;
@@ -260,14 +259,16 @@
 .btn-verde:hover { background: #1f8a4f; color: var(--texto-claro); text-decoration: none; }
 
 @media (max-width: 900px) {
-  .hero-banner-area { height: 160px; }
+  .hero-banner-area { min-height: 200px; }
   .hero-titulo-banner { width: calc(100% - 220px); }
-  .hero-titulo-banner h1 { font-size: 1.15rem; }
+  .hero-titulo-banner h1 { font-size: 1.3rem; }
+  .hero-descripcion { font-size: 0.85rem; }
 }
 @media (max-width: 600px) {
-  .hero-banner-area { height: 120px; }
+  .hero-banner-area { min-height: 160px; padding: 0.75rem; }
   .hero-titulo-banner { width: calc(100% - 140px); }
-  .hero-titulo-banner h1 { font-size: 0.95rem; }
+  .hero-titulo-banner h1 { font-size: 1.05rem; }
+  .hero-descripcion { display: none; }
   .hero-debajo { padding: 1rem 0.75rem 1.25rem; }
 }
 
@@ -600,7 +601,7 @@
 /* Variante en banda ancha (para secciones full-width) */
 .placeholder-imagen.ancha { min-height: 180px; }
 
-/* --- Tabla simple --- */
+/* --- Tabla simple (importe/2ª columna justificada a la derecha) --- */
 .tabla-simple {
   width: 100%;
   border-collapse: collapse;
@@ -614,6 +615,12 @@
   text-align: left;
   border-bottom: 1px solid var(--borde-suave);
   vertical-align: top;
+}
+.tabla-simple th:nth-child(2),
+.tabla-simple td:nth-child(2) {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
 }
 .tabla-simple thead {
   background: var(--aei-azul);
@@ -771,53 +778,79 @@
 .bloque-destacado h3 { margin-top: 0; color: var(--aei-azul); }
 .bloque-destacado :last-child { margin-bottom: 0; }
 
-/* --- Novedades en acordeones con fondo gradiente naranja --- */
+/* --- Novedades: card blanca, número circulo azul FUERA, SVG grande lateral asomando --- */
 .novedades-acordeon-lista {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 1.25rem;
+  padding-left: 32px; /* espacio para que el círculo azul sobresalga */
 }
 .novedad-acordeon {
-  background: linear-gradient(135deg, var(--fpu-naranja-claro) 0%, rgba(232,119,34,0.18) 100%);
+  position: relative;
+  background: var(--fondo-blanco);
+  border: 1px solid var(--borde-suave);
+  border-left: 4px solid var(--fpu-naranja);
   border-radius: var(--radio-borde);
-  overflow: hidden;
-  transition: box-shadow var(--transicion), transform var(--transicion);
-  border: 1px solid rgba(232,119,34,0.25);
+  transition: box-shadow var(--transicion);
+  overflow: visible;
 }
-.novedad-acordeon:hover { box-shadow: var(--sombra-media); transform: translateY(-1px); }
+.novedad-acordeon:hover { box-shadow: var(--sombra-media); }
+.novedad-acordeon-num {
+  position: absolute;
+  left: -28px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background: var(--aei-azul);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+  font-size: 1.25rem;
+  box-shadow: 0 3px 10px rgba(27,76,150,0.35);
+  z-index: 3;
+}
 .novedad-acordeon-header {
   width: 100%;
-  display: flex;
-  align-items: center;
+  display: grid;
+  grid-template-columns: 1fr 100px auto;
+  align-items: stretch;
   gap: 1rem;
-  padding: 1rem 1.25rem;
+  padding: 1rem 1.25rem 1rem 2rem;
   background: none;
   border: none;
   cursor: pointer;
   text-align: left;
   font-family: inherit;
-}
-.novedad-acordeon-num {
-  flex-shrink: 0;
-  width: 36px; height: 36px;
-  border-radius: 50%;
-  background: var(--fpu-naranja);
-  color: #fff;
-  display: flex; align-items: center; justify-content: center;
-  font-weight: 800;
-  box-shadow: 0 2px 6px rgba(232,119,34,0.4);
+  min-height: 92px;
 }
 .novedad-acordeon-titulo {
-  flex: 1;
+  align-self: center;
   color: var(--aei-azul-oscuro);
   font-weight: 700;
   font-size: 1.05rem;
   line-height: 1.3;
 }
+.novedad-acordeon-svg {
+  /* contenedor del icono: asoma por arriba aunque el acordeón esté cerrado */
+  align-self: stretch;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  overflow: hidden;
+}
+.novedad-acordeon-svg img {
+  width: 92px;
+  height: 130%;
+  object-fit: contain;
+  object-position: bottom center;
+  margin-top: -18px;
+  display: block;
+}
 .novedad-acordeon-chevron {
-  flex-shrink: 0;
-  color: var(--fpu-naranja-oscuro);
-  font-size: 1.4rem;
+  align-self: center;
+  color: var(--fpu-naranja);
+  font-size: 1.5rem;
   line-height: 1;
   transition: transform 0.35s ease;
   user-select: none;
@@ -828,30 +861,42 @@
   overflow: hidden;
   transition: max-height 0.45s ease;
 }
-.novedad-acordeon.abierto .novedad-acordeon-cuerpo { max-height: 500px; }
+.novedad-acordeon.abierto .novedad-acordeon-cuerpo { max-height: 400px; }
 .novedad-acordeon-cuerpo-inner {
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0 1.25rem 1.25rem 4.4rem;
-  color: var(--aei-azul-oscuro);
+  padding: 0 1.25rem 1.25rem 2rem;
+  color: var(--texto-principal);
 }
-.novedad-acordeon-cuerpo-inner p { margin: 0; flex: 1; }
-.novedad-acordeon-cuerpo-inner .novedad-img-mini {
-  flex-shrink: 0;
-  width: 60px; height: 60px;
-  background: rgba(255,255,255,0.65);
-  border-radius: 10px;
-  padding: 8px;
-  display: flex; align-items: center; justify-content: center;
-}
-.novedad-acordeon-cuerpo-inner .novedad-img-mini img { width: 100%; height: 100%; }
+.novedad-acordeon-cuerpo-inner p { margin: 0; }
 
-/* --- Fechas: orden invertido (fecha arriba, descripción, badge abajo) --- */
-.fecha-card { display: flex; flex-direction: column; }
-.fecha-card .fecha-grande { order: 1; margin-bottom: 0.5rem; }
-.fecha-card p           { order: 2; margin-bottom: 0.75rem; }
-.fecha-card .badge      { order: 3; align-self: flex-start; margin-bottom: 0; }
+@media (max-width: 600px) {
+  .novedades-acordeon-lista { padding-left: 26px; }
+  .novedad-acordeon-num { left: -22px; width: 42px; height: 42px; font-size: 1.05rem; }
+  .novedad-acordeon-header { grid-template-columns: 1fr 70px auto; padding-left: 1.25rem; }
+  .novedad-acordeon-svg img { width: 68px; }
+}
+
+/* --- Fechas: fecha arriba, descripción, badge SIEMPRE alineado abajo --- */
+.fecha-card {
+  display: flex;
+  flex-direction: column;
+  min-height: 220px;
+}
+.fecha-card .fecha-grande {
+  order: 1;
+  margin-bottom: 0.5rem;
+  font-size: 1.2rem;          /* algo más discreto, "tamaño cuerpo grande" */
+  line-height: 1.2;
+}
+.fecha-card p {
+  order: 2;
+  flex: 1;                    /* empuja el badge al fondo */
+  margin-bottom: 0.85rem;
+}
+.fecha-card .badge {
+  order: 3;
+  align-self: flex-start;
+  margin-bottom: 0;
+}
 
 /* --- Carrusel auto-rotación (3 visibles desktop) --- */
 .carrusel-wrapper {
@@ -866,11 +911,44 @@
   display: flex;
   gap: 1.25rem;
   width: max-content;
+  align-items: stretch;       /* las cards toman el alto de la fila */
   animation: carrusel-auto 30s linear infinite;
 }
 .carrusel-wrapper:hover .carrusel-pista { animation-play-state: paused; }
 .carrusel-item {
-  flex: 0 0 320px;        /* ancho fijo por item */
+  flex: 0 0 320px;
+  display: flex;
+}
+/* Cards dentro del carrusel: mismo alto, botón abajo */
+.carrusel-item > .tarjeta {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.carrusel-item > .tarjeta p { flex: 1; }
+.carrusel-item > .tarjeta a.btn-fpu-outline,
+.carrusel-item > .tarjeta a.btn-aei {
+  margin-top: auto;
+  align-self: flex-start;
+}
+
+/* Dots decorativos bajo el carrusel */
+.carrusel-dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.55rem;
+  margin-top: 1.25rem;
+}
+.carrusel-dots .dot {
+  width: 10px; height: 10px;
+  border-radius: 50%;
+  background: var(--borde-suave);
+  transition: background var(--transicion), transform var(--transicion);
+}
+.carrusel-dots .dot.activo {
+  background: var(--fpu-naranja);
+  transform: scale(1.25);
+  box-shadow: 0 2px 6px rgba(232,119,34,0.4);
 }
 @keyframes carrusel-auto {
   from { transform: translateX(0); }
@@ -879,6 +957,86 @@
 @media (max-width: 900px) {
   .carrusel-item { flex: 0 0 260px; }
   .carrusel-pista { animation-duration: 22s; }
+}
+
+/* --- Tarjetas en fila de 4 con encabezado de imagen --- */
+.tarjetas-fila4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.25rem;
+}
+.tarjeta-foto {
+  background: var(--fondo-blanco);
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-suave);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border-top: 4px solid var(--fpu-naranja);
+  transition: box-shadow var(--transicion), transform var(--transicion);
+}
+.tarjeta-foto:hover { box-shadow: var(--sombra-media); transform: translateY(-2px); }
+.tarjeta-foto-img {
+  width: 100%;
+  height: 130px;
+  overflow: hidden;
+  background: var(--fpu-naranja-claro);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.tarjeta-foto-img img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.tarjeta-foto-img.svg-bg {
+  background: var(--fpu-naranja-claro);
+}
+.tarjeta-foto-img.svg-bg img {
+  width: auto; height: 70%; object-fit: contain;
+}
+.tarjeta-foto h3 {
+  color: var(--aei-azul);
+  font-size: 1.05rem;
+  margin: 1rem 1.1rem 0.5rem;
+}
+.tarjeta-foto p {
+  color: var(--texto-secundario);
+  font-size: 0.92rem;
+  margin: 0 1.1rem 1.1rem;
+  line-height: 1.5;
+}
+@media (max-width: 900px) {
+  .tarjetas-fila4 { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 600px) {
+  .tarjetas-fila4 { grid-template-columns: 1fr; }
+}
+
+/* --- Sección 2 cols: variante de cajas en izq apretadas (entidades beneficiarias) --- */
+.seccion-2col.cajas-compactas .tarjeta {
+  padding: 0.85rem 1rem;
+}
+.seccion-2col.cajas-compactas .tarjetas-grid {
+  gap: 0.75rem;
+}
+
+/* --- Foto vertical recortada al alto del bloque contiguo --- */
+.directora-grid.recorte-igual,
+.seccion-2col.recorte-igual {
+  align-items: stretch;
+}
+.directora-grid.recorte-igual .directora-foto,
+.seccion-2col.recorte-igual .seccion-2col-foto {
+  height: 100%;
+}
+.seccion-2col.recorte-igual .seccion-2col-foto img {
+  aspect-ratio: auto;
+  height: 100%;
+}
+
+/* --- Separación extra entre hero y primera sección --- */
+.seccion-bajada {
+  margin-top: 1.5rem;
 }
 
 /* --- Utilidades --- */
@@ -984,7 +1142,7 @@
           <p>Cada persona solo puede figurar en una única solicitud. Aparecer en varias supone la exclusión de todas ellas.</p>
         </div>
         <div class="seccion-2col-foto">
-          <img src="assets/fotos/foto-doctorando.jpg" alt="Joven doctorando">
+          <img src="assets/fotos/foto-doctorando-retrato.jpg" alt="Joven doctorando">
         </div>
       </div>
     </section>
@@ -992,14 +1150,14 @@
     <!-- ===== DIRECCIÓN DE TESIS (foto izq + texto viñeta dcha) ===== -->
     <section class="seccion">
       <h2 class="seccion-titulo">Tu director o directora de tesis</h2>
-      <div class="directora-grid">
+      <div class="directora-grid recorte-igual">
         <img class="directora-foto" src="assets/fotos/foto-directora.jpg" alt="Investigadora directora de tesis">
         <div class="directora-texto">
           <p>Debe estar en posesión del grado de doctor y tener una vinculación funcionarial, estatutaria, laboral o cualquier otro vínculo profesional con la entidad solicitante (o con otra entidad que la autorice expresamente).</p>
           <p><strong>Cumplen el requisito de vinculación</strong> también:</p>
           <ul>
-            <li>Personas contratadas <strong>Ramón y Cajal</strong> del Plan Estatal.</li>
-            <li>Personas con <strong>certificado I3 o R3</strong> en otros programas posdoctorales del Plan Estatal, con independencia de la fecha de finalización del contrato.</li>
+            <li>Personas contratadas <strong><a href="https://www.aei.gob.es/inicio-ryc" target="_blank" rel="noopener">Programa Ramón y Cajal de la AEI</a></strong> de la AEI.</li>
+            <li>Personas con <strong>certificado I3 o R3</strong> en otros programas posdoctorales de la AEI, con independencia de la fecha de finalización del contrato.</li>
             <li>La <strong>expectativa de nombramiento</strong> tras superar un proceso selectivo público en concurrencia competitiva en el que se requiera el grado de doctor/a.</li>
           </ul>
           <p style="margin-bottom:0">Cada director/a solo puede figurar como tal en una única solicitud.</p>
@@ -1036,23 +1194,28 @@
       </div>
     </section>
 
-    <!-- ===== PROCEDIMIENTO ===== -->
+    <!-- ===== PROCEDIMIENTO (con bloques destacados) ===== -->
     <section class="seccion">
       <h2 class="seccion-titulo">Cómo es el procedimiento</h2>
-      <p>La solicitud la <strong>presenta el centro de I+D</strong> donde vas a desarrollar la tesis (no la presentas tú directamente). Tu parte:</p>
-      <ol>
-        <li>Acreditarte en el <strong>Registro Unificado de Solicitantes (RUS)</strong>.</li>
-        <li>Cumplimentar tu <strong>formulario electrónico</strong> de candidatura: datos personales, ORCID del/de la director/a, código ISCED, área y subárea AEI, resumen del plan de formación y proyecto de tesis y nota media.</li>
-        <li>Validar, enviar telemáticamente y firmar los documentos generados. Ponerlos a disposición de la entidad.</li>
-      </ol>
+      <p>La solicitud la <strong>presenta el centro de I+D</strong> donde vas a desarrollar la tesis (no la presentas tú directamente).</p>
+      <div class="bloque-destacado">
+        <h3>Tu parte: 3 pasos</h3>
+        <ol style="margin-bottom:0">
+          <li>Acreditarte en el <strong>Registro Unificado de Solicitantes (RUS)</strong>.</li>
+          <li>Cumplimentar tu <strong>formulario electrónico</strong>: datos personales, ORCID del/de la director/a, código ISCED, área y subárea AEI, resumen del plan de formación y proyecto de tesis y nota media.</li>
+          <li>Validar, enviar telemáticamente y firmar los documentos. Ponerlos a disposición de la entidad.</li>
+        </ol>
+      </div>
+      <div class="bloque-destacado azul">
+        <h3>Documentación a adjuntar</h3>
+        <ul style="margin-bottom:0">
+          <li>CVA de la persona que dirige la tesis.</li>
+          <li>Descripción del contexto científico-técnico y formativo del grupo (Anexo II, máx. 10 páginas).</li>
+          <li>Certificados académicos de las titulaciones.</li>
+          <li>Para títulos extranjeros: declaración de equivalencia de la nota media (sede electrónica del MICIU).</li>
+        </ul>
+      </div>
       <p>La representación legal de la entidad cumplimenta el resto de la solicitud y la envía telemáticamente.</p>
-      <h3 class="seccion-subtitulo">Documentación a adjuntar</h3>
-      <ul>
-        <li>CVA de la persona que dirige la tesis.</li>
-        <li>Descripción del contexto científico-técnico y formativo del grupo (Anexo II, máx. 10 páginas).</li>
-        <li>Certificados académicos de las titulaciones.</li>
-        <li>Para títulos extranjeros: declaración de equivalencia de la nota media (sede electrónica del MICIU).</li>
-      </ul>
     </section>
 
     <!-- ===== EVALUACIÓN ===== -->
@@ -1120,25 +1283,45 @@
     <section class="seccion">
       <h2 class="seccion-titulo">Tus obligaciones docentes</h2>
       <p>Como personal predoctoral en formación tienes que colaborar en tareas docentes universitarias:</p>
-      <ul>
-        <li><strong>Mínimo 90 h</strong> repartidas a lo largo de la ayuda.</li>
-        <li>Máximo absoluto: <strong>180 h</strong>.</li>
-        <li>Máximo anual: <strong>60 h</strong>.</li>
-        <li>Las desarrollas en la universidad donde estás matriculada/o en doctorado. Si la entidad beneficiaria no es esa universidad, debe existir convenio entre ambas.</li>
-        <li>No puedes ser responsable de una asignatura, tutorizar TFG/TFM, formar parte de tribunales ni firmar actas.</li>
-      </ul>
+      <div class="seccion-2col">
+        <div class="seccion-2col-texto">
+          <div class="datos-clave">
+            <div class="dato-item"><div class="dato-numero">90&nbsp;h</div><div class="dato-label">Mínimo total</div></div>
+            <div class="dato-item"><div class="dato-numero">180&nbsp;h</div><div class="dato-label">Máximo absoluto</div></div>
+            <div class="dato-item"><div class="dato-numero">60&nbsp;h</div><div class="dato-label">Máximo anual</div></div>
+            <div class="dato-item"><div class="dato-numero">4</div><div class="dato-label">Años de docencia</div></div>
+          </div>
+        </div>
+        <div class="seccion-2col-texto">
+          <div class="bloque-destacado azul">
+            <h3>Dónde se desarrollan</h3>
+            <p style="margin-bottom:0">En la universidad donde estás matriculada/o en doctorado. Si la entidad beneficiaria no es esa universidad, debe existir convenio entre ambas.</p>
+          </div>
+          <div class="bloque-destacado">
+            <h3>Lo que NO puedes hacer</h3>
+            <p style="margin-bottom:0">Ser responsable de una asignatura, tutorizar TFG/TFM, formar parte de tribunales ni firmar actas.</p>
+          </div>
+        </div>
+      </div>
     </section>
 
     <!-- ===== INTERRUPCIONES ===== -->
     <section class="seccion">
       <h2 class="seccion-titulo">Interrupciones y prórrogas</h2>
       <p>La entidad puede solicitar interrupción y prórroga del plazo de ejecución por:</p>
-      <ul>
-        <li>Incapacidad temporal vinculada al embarazo (sin duración mínima); resto de incapacidades, mínimo 2 meses consecutivos.</li>
-        <li>Permisos por gestación, embarazo, riesgo, nacimiento, maternidad/paternidad, adopción, guarda con fines de adopción o acogimiento, lactancia acumulada.</li>
-        <li>Permisos por conciliación o cuidado de menores, familiares o personas dependientes; excedencias por cuidado de hijo/a, familiar o por violencia de género.</li>
-      </ul>
-      <p>Durante la ejecución también puedes pedir, justificadamente, cambios de director/a, equipo o entidad beneficiaria, con autorización del órgano concedente.</p>
+      <div class="bloque-destacado">
+        <h3>Causas de salud</h3>
+        <p style="margin-bottom:0">Incapacidad temporal vinculada al embarazo (sin duración mínima); resto de incapacidades, <strong>mínimo 2 meses consecutivos</strong>.</p>
+      </div>
+      <div class="bloque-destacado azul">
+        <h3>Permisos de conciliación</h3>
+        <p style="margin-bottom:0">Gestación, embarazo, riesgo, nacimiento, maternidad/paternidad, adopción, guarda con fines de adopción o acogimiento, lactancia acumulada.</p>
+      </div>
+      <div class="bloque-destacado">
+        <h3>Cuidados y otros</h3>
+        <p style="margin-bottom:0">Conciliación o cuidado de menores, familiares o personas dependientes; excedencias por cuidado de hijo/a, familiar o por violencia de género.</p>
+      </div>
+      <p>Durante la ejecución también puedes pedir, justificadamente, <strong>cambios de director/a, equipo o entidad beneficiaria</strong>, con autorización del órgano concedente.</p>
     </section>
 
     <!-- ===== ENLACES ÚTILES ===== -->
@@ -1164,14 +1347,6 @@
     </section>
 
   </main>
-
-  <section class="banner-cofinanciacion">
-    <div class="container">
-      <p class="cofinanciacion-texto">
-        Programa Estatal de Recursos Humanos · Plan Estatal de Investigación Científica, Técnica y de Innovación 2024–2027.
-      </p>
-    </div>
-  </section>
 
 <!-- ===== JS:BEGIN (auto-sync from assets/app.js) ===== -->
 <script>
