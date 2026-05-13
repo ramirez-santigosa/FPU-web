@@ -116,8 +116,11 @@
 .breadcrumb a { color: var(--aei-azul); }
 .breadcrumb span { margin: 0 0.4rem; color: #999; }
 
-/* --- Contenido principal --- */
-.fpu-page main { max-width: 1200px; margin: 0 auto; padding: 0 1rem 2rem; }
+/* --- Contenido principal (margen lateral generoso) --- */
+.fpu-page main { max-width: 1200px; margin: 0 auto; padding: 0 2rem 2rem; }
+@media (min-width: 1100px) {
+  .fpu-page main { padding: 0 3rem 2rem; }
+}
 
 /* --- Secciones --- */
 .seccion { margin-bottom: 3rem; }
@@ -187,41 +190,52 @@
   text-decoration: none;
 }
 
-/* --- Hero / Banner: franja superior con la imagen, texto debajo sobre fondo limpio --- */
+/* --- Hero / Banner: TÍTULO DENTRO del banner entre los iconos; texto+botones debajo --- */
 .hero {
   background: var(--aei-azul-claro);
   color: var(--texto-principal);
   position: relative;
   overflow: hidden;
 }
-.hero::before {
-  content: "";
-  display: block;
+.hero-banner-area {
+  position: relative;
   width: 100%;
-  height: 160px;
+  height: 200px;
   background: url('assets/banner-fpu.png') center / cover no-repeat;
   border-bottom: 3px solid var(--fpu-naranja);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.hero .container {
+.hero-titulo-banner {
+  /* máximo 600px y mucho padding lateral para que NUNCA pise los iconos */
+  max-width: 600px;
+  width: calc(100% - 360px);
+  text-align: center;
+  padding: 0 1rem;
+}
+.hero-titulo-banner h1 {
+  font-size: clamp(1.2rem, 2.2vw, 1.85rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--aei-azul);
+  text-shadow: 0 1px 2px rgba(255,255,255,0.75), 0 0 12px rgba(218,227,243,0.6);
+}
+.hero-titulo-banner h1 span { color: var(--fpu-naranja); }
+
+.hero-debajo {
   max-width: 900px;
   margin: 0 auto;
   text-align: center;
-  padding: 2rem 1.5rem 2.25rem;
+  padding: 1.5rem 1.5rem 1.75rem;
 }
-.hero-texto h1 {
-  font-size: clamp(1.65rem, 3.6vw, 2.3rem);
-  font-weight: 800;
-  line-height: 1.2;
-  margin: 0 0 0.7rem;
-  color: var(--aei-azul);
-}
-.hero-texto h1 span { color: var(--fpu-naranja); }
-.hero-texto p {
+.hero-debajo p {
   font-size: 1.05rem;
   color: var(--aei-azul-oscuro);
   margin: 0 auto 1.25rem;
   line-height: 1.6;
-  max-width: 640px;
+  max-width: 700px;
 }
 .hero-botones {
   display: flex;
@@ -229,9 +243,32 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+/* Botón verde (complementario para "Si eres centro" desde otras páginas) */
+.btn-verde {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radio-borde);
+  font-weight: 600;
+  font-size: 1rem;
+  background: #2db26a;
+  color: var(--texto-claro);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transicion);
+}
+.btn-verde:hover { background: #1f8a4f; color: var(--texto-claro); text-decoration: none; }
+
+@media (max-width: 900px) {
+  .hero-banner-area { height: 160px; }
+  .hero-titulo-banner { width: calc(100% - 220px); }
+  .hero-titulo-banner h1 { font-size: 1.15rem; }
+}
 @media (max-width: 600px) {
-  .hero::before { height: 110px; }
-  .hero .container { padding: 1.5rem 1rem 1.75rem; }
+  .hero-banner-area { height: 120px; }
+  .hero-titulo-banner { width: calc(100% - 140px); }
+  .hero-titulo-banner h1 { font-size: 0.95rem; }
+  .hero-debajo { padding: 1rem 0.75rem 1.25rem; }
 }
 
 /* --- Datos clave (cuadrícula 2×2 por defecto) --- */
@@ -509,9 +546,9 @@
   margin-top: 1rem;
 }
 
-/* --- Foto principal (panorámica con joven investigador/a) --- */
+/* --- Foto panorámica de ancho completo (altura reducida 25%, separada del hero) --- */
 .foto-jovenes {
-  margin: 0 0 2rem;
+  margin: 2rem 0;
   border-radius: var(--radio-borde);
   overflow: hidden;
   box-shadow: var(--sombra-suave);
@@ -521,7 +558,7 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: 360px;
+  max-height: 270px;   /* antes 360px → -25% */
   object-fit: cover;
 }
 .foto-jovenes figcaption {
@@ -645,6 +682,205 @@
   line-height: 1.5;
 }
 
+/* --- Paleta verde alternativa para centros.html --- */
+.fpu-page.tema-verde {
+  --fpu-naranja: #2db26a;
+  --fpu-naranja-oscuro: #1f8a4f;
+  --fpu-naranja-claro: #d6f0e2;
+}
+
+/* --- Sección a 2 columnas: contenido izq + foto vertical dcha --- */
+.seccion-2col {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.seccion-2col-foto {
+  width: 100%;
+  border-radius: var(--radio-borde);
+  overflow: hidden;
+  box-shadow: var(--sombra-suave);
+  background: var(--aei-azul-claro);
+}
+.seccion-2col-foto img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+/* Variante: datos-clave dentro de la columna izquierda en 2 columnas (2x2) */
+.seccion-2col .datos-clave { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 900px) {
+  .seccion-2col { grid-template-columns: 1fr; }
+  .seccion-2col-foto img { aspect-ratio: 4 / 3; }
+}
+
+/* --- "Lo que ofrece la ayuda": 4 datos (2x2) izq + texto dcha --- */
+.ofrece-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+  align-items: center;
+}
+.ofrece-grid .datos-clave { grid-template-columns: repeat(2, 1fr); margin: 0; }
+.ofrece-grid .texto p { margin: 0 0 1rem; }
+@media (max-width: 900px) {
+  .ofrece-grid { grid-template-columns: 1fr; }
+}
+
+/* --- "Tu directora de tesis": foto vertical + texto sobre viñeta --- */
+.directora-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 2rem;
+  align-items: center;
+}
+.directora-foto {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-media);
+  display: block;
+}
+.directora-texto {
+  background: radial-gradient(ellipse at 30% 25%, rgba(255,255,255,0.95) 0%, rgba(218,227,243,0.55) 70%, rgba(218,227,243,0.4) 100%);
+  padding: 1.75rem 2rem;
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-suave);
+}
+.directora-texto p:first-child { margin-top: 0; }
+.directora-texto p:last-child { margin-bottom: 0; }
+@media (max-width: 900px) {
+  .directora-grid { grid-template-columns: 1fr; }
+}
+
+/* --- Bloques destacados para doctorandos (azul claro / naranja semi) --- */
+.bloque-destacado {
+  background: var(--fpu-naranja-claro);
+  border-radius: var(--radio-borde);
+  padding: 1.5rem 1.85rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid var(--fpu-naranja);
+}
+.bloque-destacado.azul {
+  background: var(--aei-azul-claro);
+  border-left-color: var(--aei-azul);
+}
+.bloque-destacado h3 { margin-top: 0; color: var(--aei-azul); }
+.bloque-destacado :last-child { margin-bottom: 0; }
+
+/* --- Novedades en acordeones con fondo gradiente naranja --- */
+.novedades-acordeon-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.novedad-acordeon {
+  background: linear-gradient(135deg, var(--fpu-naranja-claro) 0%, rgba(232,119,34,0.18) 100%);
+  border-radius: var(--radio-borde);
+  overflow: hidden;
+  transition: box-shadow var(--transicion), transform var(--transicion);
+  border: 1px solid rgba(232,119,34,0.25);
+}
+.novedad-acordeon:hover { box-shadow: var(--sombra-media); transform: translateY(-1px); }
+.novedad-acordeon-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+.novedad-acordeon-num {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--fpu-naranja);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+  box-shadow: 0 2px 6px rgba(232,119,34,0.4);
+}
+.novedad-acordeon-titulo {
+  flex: 1;
+  color: var(--aei-azul-oscuro);
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+.novedad-acordeon-chevron {
+  flex-shrink: 0;
+  color: var(--fpu-naranja-oscuro);
+  font-size: 1.4rem;
+  line-height: 1;
+  transition: transform 0.35s ease;
+  user-select: none;
+}
+.novedad-acordeon.abierto .novedad-acordeon-chevron { transform: rotate(180deg); }
+.novedad-acordeon-cuerpo {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease;
+}
+.novedad-acordeon.abierto .novedad-acordeon-cuerpo { max-height: 500px; }
+.novedad-acordeon-cuerpo-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.25rem 1.25rem 4.4rem;
+  color: var(--aei-azul-oscuro);
+}
+.novedad-acordeon-cuerpo-inner p { margin: 0; flex: 1; }
+.novedad-acordeon-cuerpo-inner .novedad-img-mini {
+  flex-shrink: 0;
+  width: 60px; height: 60px;
+  background: rgba(255,255,255,0.65);
+  border-radius: 10px;
+  padding: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.novedad-acordeon-cuerpo-inner .novedad-img-mini img { width: 100%; height: 100%; }
+
+/* --- Fechas: orden invertido (fecha arriba, descripción, badge abajo) --- */
+.fecha-card { display: flex; flex-direction: column; }
+.fecha-card .fecha-grande { order: 1; margin-bottom: 0.5rem; }
+.fecha-card p           { order: 2; margin-bottom: 0.75rem; }
+.fecha-card .badge      { order: 3; align-self: flex-start; margin-bottom: 0; }
+
+/* --- Carrusel auto-rotación (3 visibles desktop) --- */
+.carrusel-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem 0;
+  /* máscara opcional para sutil fade lateral */
+  mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+}
+.carrusel-pista {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  animation: carrusel-auto 30s linear infinite;
+}
+.carrusel-wrapper:hover .carrusel-pista { animation-play-state: paused; }
+.carrusel-item {
+  flex: 0 0 320px;        /* ancho fijo por item */
+}
+@keyframes carrusel-auto {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }   /* funciona si la pista contiene 2 copias */
+}
+@media (max-width: 900px) {
+  .carrusel-item { flex: 0 0 260px; }
+  .carrusel-pista { animation-duration: 22s; }
+}
+
 /* --- Utilidades --- */
 .text-center { text-align: center; }
 .text-azul { color: var(--aei-azul); }
@@ -708,84 +944,97 @@
   </div>
 
   <section class="hero">
-    <div class="container">
-      <div class="hero-texto">
+    <div class="hero-banner-area">
+      <div class="hero-titulo-banner">
         <h1>Si eres <span>doctorando</span></h1>
-        <p>Lo que necesitas saber para solicitar una ayuda FPU 2026: requisitos, dirección de tesis, plazos, obligaciones y cómo prepararla con tu grupo.</p>
-        <div class="hero-botones">
-          <a class="btn-fpu" href="buscador-grupos.html">Buscar grupos</a>
-          <a class="btn-fpu-outline" href="index.html">Volver al inicio</a>
-        </div>
+      </div>
+    </div>
+    <div class="hero-debajo">
+      <p>Lo que necesitas saber para solicitar una ayuda FPU 2026: requisitos, dirección de tesis, plazos, obligaciones y cómo prepararla con tu grupo.</p>
+      <div class="hero-botones">
+        <a class="btn-fpu" href="buscador-grupos.html">Buscar grupos</a>
+        <a class="btn-fpu-outline" href="index.html">Volver al inicio</a>
       </div>
     </div>
   </section>
 
   <main>
 
-    <figure class="foto-jovenes">
-      <img src="assets/fotos/foto-doctorando.jpg" alt="Joven doctorando en su entorno de investigación">
-    </figure>
-
-    <!-- ===== REQUISITOS ===== -->
+    <!-- ===== REQUISITOS (2 columnas) ===== -->
     <section class="seccion">
       <h2 class="seccion-titulo">¿Puedes participar?</h2>
-      <p><strong>Sí, si en el momento de la solicitud cumples una de estas dos condiciones:</strong></p>
-      <ul>
-        <li>Estás <strong>matriculada/o o admitida/o</strong> en un programa de doctorado para el curso 2026/2027.</li>
-        <li>No lo estás todavía, pero estarás <strong>en disposición de estarlo</strong> en la fecha en la que se formalice el contrato.</li>
-      </ul>
-      <p>Ya no se exige una fecha concreta de finalización de los estudios previos.</p>
-      <p><strong>No puedes participar</strong> si:</p>
-      <ul>
-        <li>Has iniciado tu formación predoctoral con otra ayuda predoctoral del PEICTI 2024–2027 o de planes anteriores.</li>
-        <li>Estás en posesión del título de Doctor por cualquier universidad española o extranjera.</li>
-        <li>Has disfrutado previamente de un contrato predoctoral por tiempo superior a 12 meses.</li>
-      </ul>
-      <p>Cada persona solo puede figurar en una única solicitud. Aparecer en varias supone la exclusión de todas ellas.</p>
-    </section>
-
-    <!-- ===== DIRECCIÓN DE TESIS ===== -->
-    <section class="seccion">
-      <h2 class="seccion-titulo">Tu director o directora de tesis</h2>
-      <p>Debe estar en posesión del grado de doctor y tener una vinculación funcionarial, estatutaria, laboral o cualquier otro vínculo profesional con la entidad solicitante (o con otra entidad que la autorice expresamente).</p>
-      <p><strong>Cumplen el requisito de vinculación</strong> también:</p>
-      <ul>
-        <li>Personas contratadas <strong>Ramón y Cajal</strong> del Plan Estatal.</li>
-        <li>Personas con <strong>certificado I3 o R3</strong> en otros programas posdoctorales del Plan Estatal, con independencia de la fecha de finalización del contrato.</li>
-        <li>La <strong>expectativa de nombramiento</strong> tras superar un proceso selectivo público en concurrencia competitiva en el que se requiera el grado de doctor/a.</li>
-      </ul>
-      <p>Cada director/a solo puede figurar como tal en una única solicitud.</p>
-    </section>
-
-    <!-- ===== LO QUE OFRECE LA AYUDA ===== -->
-    <section class="seccion">
-      <h2 class="seccion-titulo">Lo que ofrece la ayuda</h2>
-      <div class="datos-clave">
-        <div class="dato-item">
-          <div class="dato-numero">4 años</div>
-          <div class="dato-label">Duración máxima del contrato</div>
+      <div class="seccion-2col">
+        <div class="seccion-2col-texto">
+          <div class="bloque-destacado">
+            <h3>Sí, si cumples una de estas condiciones</h3>
+            <ul>
+              <li>Estás <strong>matriculada/o o admitida/o</strong> en un programa de doctorado para el curso 2026/2027.</li>
+              <li>No lo estás todavía, pero estarás <strong>en disposición de estarlo</strong> al formalizar el contrato.</li>
+            </ul>
+            <p style="margin-bottom:0">Ya no se exige una fecha concreta de finalización de los estudios previos.</p>
+          </div>
+          <div class="bloque-destacado azul">
+            <h3>No puedes participar si</h3>
+            <ul style="margin-bottom:0">
+              <li>Has iniciado tu formación predoctoral con otra ayuda predoctoral del PEICTI 2024–2027 o de planes anteriores.</li>
+              <li>Estás en posesión del título de Doctor por cualquier universidad.</li>
+              <li>Has disfrutado previamente de un contrato predoctoral por tiempo superior a 12 meses.</li>
+            </ul>
+          </div>
+          <p>Cada persona solo puede figurar en una única solicitud. Aparecer en varias supone la exclusión de todas ellas.</p>
         </div>
-        <div class="dato-item">
-          <div class="dato-numero">+12 meses</div>
-          <div class="dato-label">Periodo de orientación posdoctoral (POP)</div>
-        </div>
-        <div class="dato-item">
-          <div class="dato-numero">140.350&nbsp;€</div>
-          <div class="dato-label">Cuantía total</div>
-        </div>
-        <div class="dato-item">
-          <div class="dato-numero">90&nbsp;h</div>
-          <div class="dato-label">Docencia universitaria mínima</div>
+        <div class="seccion-2col-foto">
+          <img src="assets/fotos/foto-doctorando.jpg" alt="Joven doctorando">
         </div>
       </div>
-      <p>La duración máxima de la actuación es de <strong>4 años</strong> desde tu incorporación al centro. Dentro de esos 4 años se incluye un <strong>periodo de orientación posdoctoral (POP) de hasta 12 meses</strong> que comienza cuando lees la tesis, siempre que la lectura ocurra durante el periodo de ejecución.</p>
-      <p>La <strong>retribución</strong> no puede ser inferior al 75% del salario fijado en los convenios colectivos de aplicación, ni al SMI vigente. Como referencia mínima se toma el Grupo Profesional M3 del convenio único de personal laboral de la AGE.</p>
     </section>
 
-    <!-- ===== FOTO INTERMEDIA ===== -->
-    <figure class="foto-jovenes">
-      <img src="assets/fotos/foto-doctorando-retrato.jpg" alt="Joven investigadora sonriente">
-    </figure>
+    <!-- ===== DIRECCIÓN DE TESIS (foto izq + texto viñeta dcha) ===== -->
+    <section class="seccion">
+      <h2 class="seccion-titulo">Tu director o directora de tesis</h2>
+      <div class="directora-grid">
+        <img class="directora-foto" src="assets/fotos/foto-directora.jpg" alt="Investigadora directora de tesis">
+        <div class="directora-texto">
+          <p>Debe estar en posesión del grado de doctor y tener una vinculación funcionarial, estatutaria, laboral o cualquier otro vínculo profesional con la entidad solicitante (o con otra entidad que la autorice expresamente).</p>
+          <p><strong>Cumplen el requisito de vinculación</strong> también:</p>
+          <ul>
+            <li>Personas contratadas <strong>Ramón y Cajal</strong> del Plan Estatal.</li>
+            <li>Personas con <strong>certificado I3 o R3</strong> en otros programas posdoctorales del Plan Estatal, con independencia de la fecha de finalización del contrato.</li>
+            <li>La <strong>expectativa de nombramiento</strong> tras superar un proceso selectivo público en concurrencia competitiva en el que se requiera el grado de doctor/a.</li>
+          </ul>
+          <p style="margin-bottom:0">Cada director/a solo puede figurar como tal en una única solicitud.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== LO QUE OFRECE LA AYUDA (2 cols: 4 datos izq + texto dcha) ===== -->
+    <section class="seccion">
+      <h2 class="seccion-titulo">Lo que ofrece la ayuda</h2>
+      <div class="ofrece-grid">
+        <div class="datos-clave">
+          <div class="dato-item">
+            <div class="dato-numero">4 años</div>
+            <div class="dato-label">Duración máxima del contrato</div>
+          </div>
+          <div class="dato-item">
+            <div class="dato-numero">+12 meses</div>
+            <div class="dato-label">Periodo de orientación posdoctoral (POP)</div>
+          </div>
+          <div class="dato-item">
+            <div class="dato-numero">140.350&nbsp;€</div>
+            <div class="dato-label">Cuantía total</div>
+          </div>
+          <div class="dato-item">
+            <div class="dato-numero">90&nbsp;h</div>
+            <div class="dato-label">Docencia mínima</div>
+          </div>
+        </div>
+        <div class="texto">
+          <p>La duración máxima de la actuación es de <strong>4 años</strong> desde tu incorporación al centro. Dentro de esos 4 años se incluye un <strong>periodo de orientación posdoctoral (POP) de hasta 12 meses</strong> que comienza cuando lees la tesis, siempre que la lectura ocurra durante el periodo de ejecución.</p>
+          <p>La <strong>retribución</strong> no puede ser inferior al 75% del salario fijado en los convenios colectivos de aplicación, ni al SMI vigente. Como referencia mínima se toma el Grupo Profesional M3 del convenio único de personal laboral de la AGE.</p>
+        </div>
+      </div>
+    </section>
 
     <!-- ===== PROCEDIMIENTO ===== -->
     <section class="seccion">
@@ -827,40 +1076,42 @@
       <h3 class="seccion-subtitulo">Calendario de la convocatoria 2026</h3>
       <div class="fechas-clave">
         <div class="fecha-card">
-          <span class="badge">Solicitud</span>
           <div class="fecha-grande">1 – 30 oct. 2026</div>
           <p>Plazo para que el centro presente tu solicitud. Tú la cumplimentas previamente en el RUS.</p>
+          <span class="badge">Solicitud</span>
         </div>
         <div class="fecha-card">
-          <span class="badge">Resolución provisional</span>
           <div class="fecha-grande">Junio 2027</div>
           <p>Publicación de la PRP con la lista priorizada por área temática.</p>
+          <span class="badge">Resolución provisional</span>
         </div>
         <div class="fecha-card">
-          <span class="badge">Inicio del contrato</span>
           <div class="fecha-grande">Septiembre 2027</div>
           <p>Incorporación efectiva al centro de I+D. Empieza tu contrato predoctoral.</p>
+          <span class="badge">Inicio del contrato</span>
         </div>
       </div>
       <p class="aviso-fechas">⚠️ Fechas orientativas. Se confirmarán en la publicación oficial en el BOE.</p>
 
       <h3 class="seccion-subtitulo mt-3">Plazos durante la ayuda</h3>
-      <div class="tarjetas-grid">
-        <div class="tarjeta">
+      <div class="carrusel-wrapper">
+        <div class="carrusel-pista">
+        <div class="carrusel-item"><div class="tarjeta">
           <h3>Tras la resolución</h3>
           <p><strong>20 días</strong> para formalizar el contrato y <strong>9 meses</strong> para incorporarte al centro. Ambos prorrogables con justificación.</p>
-        </div>
-        <div class="tarjeta">
+        </div></div>
+        <div class="carrusel-item"><div class="tarjeta">
           <h3>Mes 20–21</h3>
           <p>Informe intermedio de seguimiento científico-técnico. Su evaluación condiciona la continuidad de la financiación.</p>
-        </div>
-        <div class="tarjeta">
+        </div></div>
+        <div class="carrusel-item"><div class="tarjeta">
           <h3>Mes siguiente al fin</h3>
           <p>Informe final que cubre todo el periodo de ejecución de la ayuda.</p>
-        </div>
-        <div class="tarjeta">
+        </div></div>
+        <div class="carrusel-item"><div class="tarjeta">
           <h3>Tras la tesis</h3>
           <p>Hasta 12 meses de orientación posdoctoral (POP) dentro de la propia ayuda.</p>
+        </div></div>
         </div>
       </div>
     </section>
@@ -960,6 +1211,21 @@ document.addEventListener('DOMContentLoaded', function () {
         contenido.classList.add('activo');
       }
     });
+  });
+
+  // Acordeones de novedades (estilo card naranja con desplegable animado)
+  document.querySelectorAll('.novedad-acordeon-header').forEach(function (header) {
+    header.addEventListener('click', function () {
+      var card = this.closest('.novedad-acordeon');
+      card.classList.toggle('abierto');
+      this.setAttribute('aria-expanded', card.classList.contains('abierto'));
+    });
+  });
+
+  // Carrusel auto: duplica los items para crear loop sin saltos
+  document.querySelectorAll('.carrusel-pista').forEach(function (pista) {
+    var items = Array.from(pista.children);
+    items.forEach(function (it) { pista.appendChild(it.cloneNode(true)); });
   });
 
   // Scroll suave

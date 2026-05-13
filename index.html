@@ -116,8 +116,11 @@
 .breadcrumb a { color: var(--aei-azul); }
 .breadcrumb span { margin: 0 0.4rem; color: #999; }
 
-/* --- Contenido principal --- */
-.fpu-page main { max-width: 1200px; margin: 0 auto; padding: 0 1rem 2rem; }
+/* --- Contenido principal (margen lateral generoso) --- */
+.fpu-page main { max-width: 1200px; margin: 0 auto; padding: 0 2rem 2rem; }
+@media (min-width: 1100px) {
+  .fpu-page main { padding: 0 3rem 2rem; }
+}
 
 /* --- Secciones --- */
 .seccion { margin-bottom: 3rem; }
@@ -187,41 +190,52 @@
   text-decoration: none;
 }
 
-/* --- Hero / Banner: franja superior con la imagen, texto debajo sobre fondo limpio --- */
+/* --- Hero / Banner: TÍTULO DENTRO del banner entre los iconos; texto+botones debajo --- */
 .hero {
   background: var(--aei-azul-claro);
   color: var(--texto-principal);
   position: relative;
   overflow: hidden;
 }
-.hero::before {
-  content: "";
-  display: block;
+.hero-banner-area {
+  position: relative;
   width: 100%;
-  height: 160px;
+  height: 200px;
   background: url('assets/banner-fpu.png') center / cover no-repeat;
   border-bottom: 3px solid var(--fpu-naranja);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.hero .container {
+.hero-titulo-banner {
+  /* máximo 600px y mucho padding lateral para que NUNCA pise los iconos */
+  max-width: 600px;
+  width: calc(100% - 360px);
+  text-align: center;
+  padding: 0 1rem;
+}
+.hero-titulo-banner h1 {
+  font-size: clamp(1.2rem, 2.2vw, 1.85rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--aei-azul);
+  text-shadow: 0 1px 2px rgba(255,255,255,0.75), 0 0 12px rgba(218,227,243,0.6);
+}
+.hero-titulo-banner h1 span { color: var(--fpu-naranja); }
+
+.hero-debajo {
   max-width: 900px;
   margin: 0 auto;
   text-align: center;
-  padding: 2rem 1.5rem 2.25rem;
+  padding: 1.5rem 1.5rem 1.75rem;
 }
-.hero-texto h1 {
-  font-size: clamp(1.65rem, 3.6vw, 2.3rem);
-  font-weight: 800;
-  line-height: 1.2;
-  margin: 0 0 0.7rem;
-  color: var(--aei-azul);
-}
-.hero-texto h1 span { color: var(--fpu-naranja); }
-.hero-texto p {
+.hero-debajo p {
   font-size: 1.05rem;
   color: var(--aei-azul-oscuro);
   margin: 0 auto 1.25rem;
   line-height: 1.6;
-  max-width: 640px;
+  max-width: 700px;
 }
 .hero-botones {
   display: flex;
@@ -229,9 +243,32 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+/* Botón verde (complementario para "Si eres centro" desde otras páginas) */
+.btn-verde {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radio-borde);
+  font-weight: 600;
+  font-size: 1rem;
+  background: #2db26a;
+  color: var(--texto-claro);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transicion);
+}
+.btn-verde:hover { background: #1f8a4f; color: var(--texto-claro); text-decoration: none; }
+
+@media (max-width: 900px) {
+  .hero-banner-area { height: 160px; }
+  .hero-titulo-banner { width: calc(100% - 220px); }
+  .hero-titulo-banner h1 { font-size: 1.15rem; }
+}
 @media (max-width: 600px) {
-  .hero::before { height: 110px; }
-  .hero .container { padding: 1.5rem 1rem 1.75rem; }
+  .hero-banner-area { height: 120px; }
+  .hero-titulo-banner { width: calc(100% - 140px); }
+  .hero-titulo-banner h1 { font-size: 0.95rem; }
+  .hero-debajo { padding: 1rem 0.75rem 1.25rem; }
 }
 
 /* --- Datos clave (cuadrícula 2×2 por defecto) --- */
@@ -509,9 +546,9 @@
   margin-top: 1rem;
 }
 
-/* --- Foto principal (panorámica con joven investigador/a) --- */
+/* --- Foto panorámica de ancho completo (altura reducida 25%, separada del hero) --- */
 .foto-jovenes {
-  margin: 0 0 2rem;
+  margin: 2rem 0;
   border-radius: var(--radio-borde);
   overflow: hidden;
   box-shadow: var(--sombra-suave);
@@ -521,7 +558,7 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: 360px;
+  max-height: 270px;   /* antes 360px → -25% */
   object-fit: cover;
 }
 .foto-jovenes figcaption {
@@ -645,6 +682,205 @@
   line-height: 1.5;
 }
 
+/* --- Paleta verde alternativa para centros.html --- */
+.fpu-page.tema-verde {
+  --fpu-naranja: #2db26a;
+  --fpu-naranja-oscuro: #1f8a4f;
+  --fpu-naranja-claro: #d6f0e2;
+}
+
+/* --- Sección a 2 columnas: contenido izq + foto vertical dcha --- */
+.seccion-2col {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.seccion-2col-foto {
+  width: 100%;
+  border-radius: var(--radio-borde);
+  overflow: hidden;
+  box-shadow: var(--sombra-suave);
+  background: var(--aei-azul-claro);
+}
+.seccion-2col-foto img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+/* Variante: datos-clave dentro de la columna izquierda en 2 columnas (2x2) */
+.seccion-2col .datos-clave { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 900px) {
+  .seccion-2col { grid-template-columns: 1fr; }
+  .seccion-2col-foto img { aspect-ratio: 4 / 3; }
+}
+
+/* --- "Lo que ofrece la ayuda": 4 datos (2x2) izq + texto dcha --- */
+.ofrece-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+  align-items: center;
+}
+.ofrece-grid .datos-clave { grid-template-columns: repeat(2, 1fr); margin: 0; }
+.ofrece-grid .texto p { margin: 0 0 1rem; }
+@media (max-width: 900px) {
+  .ofrece-grid { grid-template-columns: 1fr; }
+}
+
+/* --- "Tu directora de tesis": foto vertical + texto sobre viñeta --- */
+.directora-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 2rem;
+  align-items: center;
+}
+.directora-foto {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-media);
+  display: block;
+}
+.directora-texto {
+  background: radial-gradient(ellipse at 30% 25%, rgba(255,255,255,0.95) 0%, rgba(218,227,243,0.55) 70%, rgba(218,227,243,0.4) 100%);
+  padding: 1.75rem 2rem;
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-suave);
+}
+.directora-texto p:first-child { margin-top: 0; }
+.directora-texto p:last-child { margin-bottom: 0; }
+@media (max-width: 900px) {
+  .directora-grid { grid-template-columns: 1fr; }
+}
+
+/* --- Bloques destacados para doctorandos (azul claro / naranja semi) --- */
+.bloque-destacado {
+  background: var(--fpu-naranja-claro);
+  border-radius: var(--radio-borde);
+  padding: 1.5rem 1.85rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid var(--fpu-naranja);
+}
+.bloque-destacado.azul {
+  background: var(--aei-azul-claro);
+  border-left-color: var(--aei-azul);
+}
+.bloque-destacado h3 { margin-top: 0; color: var(--aei-azul); }
+.bloque-destacado :last-child { margin-bottom: 0; }
+
+/* --- Novedades en acordeones con fondo gradiente naranja --- */
+.novedades-acordeon-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.novedad-acordeon {
+  background: linear-gradient(135deg, var(--fpu-naranja-claro) 0%, rgba(232,119,34,0.18) 100%);
+  border-radius: var(--radio-borde);
+  overflow: hidden;
+  transition: box-shadow var(--transicion), transform var(--transicion);
+  border: 1px solid rgba(232,119,34,0.25);
+}
+.novedad-acordeon:hover { box-shadow: var(--sombra-media); transform: translateY(-1px); }
+.novedad-acordeon-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+.novedad-acordeon-num {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--fpu-naranja);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+  box-shadow: 0 2px 6px rgba(232,119,34,0.4);
+}
+.novedad-acordeon-titulo {
+  flex: 1;
+  color: var(--aei-azul-oscuro);
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+.novedad-acordeon-chevron {
+  flex-shrink: 0;
+  color: var(--fpu-naranja-oscuro);
+  font-size: 1.4rem;
+  line-height: 1;
+  transition: transform 0.35s ease;
+  user-select: none;
+}
+.novedad-acordeon.abierto .novedad-acordeon-chevron { transform: rotate(180deg); }
+.novedad-acordeon-cuerpo {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease;
+}
+.novedad-acordeon.abierto .novedad-acordeon-cuerpo { max-height: 500px; }
+.novedad-acordeon-cuerpo-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.25rem 1.25rem 4.4rem;
+  color: var(--aei-azul-oscuro);
+}
+.novedad-acordeon-cuerpo-inner p { margin: 0; flex: 1; }
+.novedad-acordeon-cuerpo-inner .novedad-img-mini {
+  flex-shrink: 0;
+  width: 60px; height: 60px;
+  background: rgba(255,255,255,0.65);
+  border-radius: 10px;
+  padding: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.novedad-acordeon-cuerpo-inner .novedad-img-mini img { width: 100%; height: 100%; }
+
+/* --- Fechas: orden invertido (fecha arriba, descripción, badge abajo) --- */
+.fecha-card { display: flex; flex-direction: column; }
+.fecha-card .fecha-grande { order: 1; margin-bottom: 0.5rem; }
+.fecha-card p           { order: 2; margin-bottom: 0.75rem; }
+.fecha-card .badge      { order: 3; align-self: flex-start; margin-bottom: 0; }
+
+/* --- Carrusel auto-rotación (3 visibles desktop) --- */
+.carrusel-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem 0;
+  /* máscara opcional para sutil fade lateral */
+  mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+}
+.carrusel-pista {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  animation: carrusel-auto 30s linear infinite;
+}
+.carrusel-wrapper:hover .carrusel-pista { animation-play-state: paused; }
+.carrusel-item {
+  flex: 0 0 320px;        /* ancho fijo por item */
+}
+@keyframes carrusel-auto {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }   /* funciona si la pista contiene 2 copias */
+}
+@media (max-width: 900px) {
+  .carrusel-item { flex: 0 0 260px; }
+  .carrusel-pista { animation-duration: 22s; }
+}
+
 /* --- Utilidades --- */
 .text-center { text-align: center; }
 .text-azul { color: var(--aei-azul); }
@@ -713,129 +949,187 @@
 
   <!-- ===== HERO / BANNER ===== -->
   <section class="hero">
-    <div class="container">
-      <div class="hero-texto">
+    <div class="hero-banner-area" aria-hidden="false">
+      <div class="hero-titulo-banner">
         <h1>Programa <span>FPU</span> 2026</h1>
-        <p>Formación de Profesorado Universitario. Contratos predoctorales para futuras y futuros doctores que combinan investigación de excelencia con formación docente. Por primera vez gestionada por la <strong>Agencia Estatal de Investigación</strong>.</p>
-        <div class="hero-botones">
-          <a class="btn-fpu" href="doctorandos.html">Si eres doctorando</a>
-          <a class="btn-fpu-outline" href="centros.html">Si eres centro</a>
-        </div>
+      </div>
+    </div>
+    <div class="hero-debajo">
+      <p>Formación de Profesorado Universitario. Contratos predoctorales para futuras y futuros doctores que combinan investigación de excelencia con formación docente. Por primera vez gestionada por la <strong>Agencia Estatal de Investigación</strong>.</p>
+      <div class="hero-botones">
+        <a class="btn-fpu" href="doctorandos.html">Si eres doctorando</a>
+        <a class="btn-verde" href="centros.html">Si eres centro</a>
       </div>
     </div>
   </section>
 
   <main>
 
-    <!-- ===== FOTO PRINCIPAL ===== -->
-    <figure class="foto-jovenes">
-      <img src="assets/fotos/foto-jovenes-investigadores.jpg" alt="Jóvenes investigadoras e investigadores trabajando en equipo">
-    </figure>
-
-    <!-- ===== ¿QUÉ ES FPU? ===== -->
+    <!-- ===== ¿QUÉ ES FPU? (2 columnas: contenido + foto vertical) ===== -->
     <section class="seccion">
       <h2 class="seccion-titulo">¿Qué es el Programa FPU?</h2>
-      <p>Las ayudas para la <strong>Formación de Profesorado Universitario (FPU)</strong> tienen como finalidad la formación de doctores y doctoras mediante la financiación de contratos predoctorales, de modo que el personal investigador en formación realice una tesis doctoral y, al mismo tiempo, adquiera las competencias docentes universitarias necesarias para incorporarse al sistema de educación superior.</p>
-      <p>Iniciado en los años 90 por el Ministerio de Educación, el programa FPU pasa en 2026 a estar gestionado por la <strong>Agencia Estatal de Investigación (AEI)</strong>, en virtud del Real Decreto 265/2026, de 1 de abril. La integración tiene como objetivo unificar la gestión de las ayudas a la formación de doctores del Ministerio de Ciencia, Innovación y Universidades, simplificar el procedimiento y alinear FPU con los procesos consolidados de la AEI.</p>
-      <div class="datos-clave">
-        <div class="dato-item">
-          <div class="dato-numero">4</div>
-          <div class="dato-label">Años de duración del contrato</div>
+      <div class="seccion-2col">
+        <div class="seccion-2col-texto">
+          <p>Las ayudas para la <strong>Formación de Profesorado Universitario (FPU)</strong> tienen como finalidad la formación de doctores y doctoras mediante la financiación de contratos predoctorales, de modo que el personal investigador en formación realice una tesis doctoral y, al mismo tiempo, adquiera las competencias docentes universitarias necesarias para incorporarse al sistema de educación superior.</p>
+          <p>Iniciado en los años 90 por el Ministerio de Educación, el programa FPU pasa en 2026 a estar gestionado por la <strong>Agencia Estatal de Investigación (AEI)</strong>, en virtud del Real Decreto 265/2026, de 1 de abril. La integración tiene como objetivo unificar la gestión de las ayudas a la formación de doctores del Ministerio de Ciencia, Innovación y Universidades, simplificar el procedimiento y alinear FPU con los procesos consolidados de la AEI.</p>
+          <div class="datos-clave">
+            <div class="dato-item">
+              <div class="dato-numero">4</div>
+              <div class="dato-label">Años de duración del contrato</div>
+            </div>
+            <div class="dato-item">
+              <div class="dato-numero">+12</div>
+              <div class="dato-label">Meses de orientación posdoctoral (POP)</div>
+            </div>
+            <div class="dato-item">
+              <div class="dato-numero">140.350&nbsp;€</div>
+              <div class="dato-label">Cuantía total por ayuda</div>
+            </div>
+            <div class="dato-item">
+              <div class="dato-numero">90&nbsp;h</div>
+              <div class="dato-label">Mínimo de docencia universitaria</div>
+            </div>
+          </div>
         </div>
-        <div class="dato-item">
-          <div class="dato-numero">+12</div>
-          <div class="dato-label">Meses de orientación posdoctoral (POP)</div>
-        </div>
-        <div class="dato-item">
-          <div class="dato-numero">140.350&nbsp;€</div>
-          <div class="dato-label">Cuantía total por ayuda</div>
-        </div>
-        <div class="dato-item">
-          <div class="dato-numero">90&nbsp;h</div>
-          <div class="dato-label">Mínimo de docencia universitaria</div>
+        <div class="seccion-2col-foto">
+          <img src="assets/fotos/foto-doctorando.jpg" alt="Jóvenes investigadores en un campus universitario">
         </div>
       </div>
-      <div class="hero-botones mt-2">
-        <a class="btn-fpu" href="doctorandos.html">Si eres doctorando</a>
-        <a class="btn-fpu-outline" href="centros.html">Si eres centro</a>
+    </section>
+
+    <!-- ===== FECHAS CLAVE (movidas a continuación de "¿Qué es FPU?") ===== -->
+    <section class="seccion">
+      <h2 class="seccion-titulo">Fechas clave de la convocatoria 2026</h2>
+      <div class="fechas-clave">
+        <div class="fecha-card">
+          <div class="fecha-grande">1 – 30 oct. 2026</div>
+          <p>Periodo de presentación de solicitudes. Las presenta el centro de I+D vía registro electrónico de la AEI.</p>
+          <span class="badge">Solicitud</span>
+        </div>
+        <div class="fecha-card">
+          <div class="fecha-grande">Junio 2027</div>
+          <p>Publicación de la Propuesta de Resolución Provisional (PRP) con las candidaturas seleccionadas y reservas.</p>
+          <span class="badge">Resolución provisional</span>
+        </div>
+        <div class="fecha-card">
+          <div class="fecha-grande">Septiembre 2027</div>
+          <p>Incorporación efectiva del personal investigador a los centros de I+D.</p>
+          <span class="badge">Inicio de contratos</span>
+        </div>
       </div>
+      <p class="aviso-fechas">⚠️ Fechas orientativas. Se confirmarán en el momento de la publicación oficial de la convocatoria en el BOE.</p>
     </section>
 
     <!-- ===== NOVEDADES DESTACADAS ===== -->
     <section class="seccion">
       <h2 class="seccion-titulo">Novedades de la Convocatoria 2026</h2>
-      <div class="novedades-destacadas">
-        <div class="novedad-item">
-          <div class="novedad-icono">1</div>
-          <div class="novedad-texto">
-            <h3>Gestión integrada en la AEI</h3>
-            <p>FPU pasa a gestionarse desde la Agencia Estatal de Investigación. Se alinean tramitación, evaluación y seguimiento con el resto de convocatorias predoctorales y posdoctorales de la AEI.</p>
-          </div>
-          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/institucional.svg" alt=""></div>
-        </div>
-        <div class="novedad-item">
-          <div class="novedad-icono">2</div>
-          <div class="novedad-texto">
-            <h3>Solicitud presentada por el centro de I+D</h3>
-            <p>Las solicitudes ya no las presenta la persona candidata, sino el Centro de I+D donde se vaya a desarrollar la tesis. Se mantiene la cumplimentación telemática del formulario por parte de la persona participante en el Registro Unificado de Solicitantes (RUS).</p>
-          </div>
-          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/formulario.svg" alt=""></div>
-        </div>
-        <div class="novedad-item">
-          <div class="novedad-icono">3</div>
-          <div class="novedad-texto">
-            <h3>Requisitos más flexibles para participantes</h3>
-            <p>Pueden solicitar la ayuda quienes estén matriculadas/admitidas o en disposición de estarlo a la firma del contrato. Desaparecen los requisitos de fecha de finalización de los estudios previos.</p>
-          </div>
-          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/persona-check.svg" alt=""></div>
-        </div>
-        <div class="novedad-item">
-          <div class="novedad-icono">4</div>
-          <div class="novedad-texto">
-            <h3>Ampliación de quién puede dirigir tesis</h3>
-            <p>Se reconocen explícitamente las personas Ramón y Cajal, certificados I3/R3 de programas posdoctorales del Plan Estatal y la expectativa de nombramiento tras un proceso selectivo público que exija el grado de doctor/a.</p>
-          </div>
-          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/personas.svg" alt=""></div>
-        </div>
-        <div class="novedad-item">
-          <div class="novedad-icono">5</div>
-          <div class="novedad-texto">
-            <h3>Nuevos criterios de evaluación (75 + 25)</h3>
-            <p>Expediente académico ponderado hasta 75 puntos (umbral 60). Calidad y trayectoria del equipo hasta 25 puntos: 10 trayectoria del/de la director/a de tesis y 15 contexto científico-técnico y formativo del grupo.</p>
-          </div>
-          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/evaluacion.svg" alt=""></div>
-        </div>
-        <div class="novedad-item">
-          <div class="novedad-icono">6</div>
-          <div class="novedad-texto">
-            <h3>Periodo de orientación posdoctoral (POP)</h3>
-            <p>Dentro de los 4 años de duración máxima de la ayuda se incluye un periodo de hasta 12 meses tras la obtención del título de doctor/a, destinado al perfeccionamiento y especialización profesional.</p>
-          </div>
-          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/pop.svg" alt=""></div>
-        </div>
-        <div class="novedad-item">
-          <div class="novedad-icono">7</div>
-          <div class="novedad-texto">
-            <h3>Gastos elegibles más amplios</h3>
-            <p>Se incluyen en una única ayuda los gastos de contratación, indemnización por finalización, estancias en centros de I+D y matrícula del programa de doctorado. Desaparece la convocatoria adicional de estancias.</p>
-          </div>
-          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/moneda.svg" alt=""></div>
-        </div>
-        <div class="novedad-item">
-          <div class="novedad-icono">8</div>
-          <div class="novedad-texto">
-            <h3>Seguimiento simplificado</h3>
-            <p>Solo dos informes científico-técnicos: intermedio (mes 20–21) y final (mes siguiente al fin de la ayuda). Desaparece el informe anual. La evaluación del informe intermedio condiciona la continuidad de la financiación.</p>
-          </div>
-          <div class="novedad-img" aria-hidden="true"><img src="assets/ilustraciones/seguimiento.svg" alt=""></div>
-        </div>
+      <div class="novedades-acordeon-lista">
+  <article class="novedad-acordeon">
+    <button class="novedad-acordeon-header" aria-expanded="false">
+      <span class="novedad-acordeon-num">1</span>
+      <span class="novedad-acordeon-titulo">Gestión integrada en la AEI</span>
+      <span class="novedad-acordeon-chevron">⌄</span>
+    </button>
+    <div class="novedad-acordeon-cuerpo">
+      <div class="novedad-acordeon-cuerpo-inner">
+        <p>FPU pasa a gestionarse desde la Agencia Estatal de Investigación. Se alinean tramitación, evaluación y seguimiento con el resto de convocatorias predoctorales y posdoctorales de la AEI.</p>
+        <div class="novedad-img-mini" aria-hidden="true"><img src="assets/ilustraciones/institucional.svg" alt=""></div>
       </div>
+    </div>
+  </article>
+  <article class="novedad-acordeon">
+    <button class="novedad-acordeon-header" aria-expanded="false">
+      <span class="novedad-acordeon-num">2</span>
+      <span class="novedad-acordeon-titulo">Solicitud presentada por el centro de I+D</span>
+      <span class="novedad-acordeon-chevron">⌄</span>
+    </button>
+    <div class="novedad-acordeon-cuerpo">
+      <div class="novedad-acordeon-cuerpo-inner">
+        <p>Las solicitudes ya no las presenta la persona candidata, sino el Centro de I+D donde se vaya a desarrollar la tesis. Se mantiene la cumplimentación telemática del formulario por parte de la persona participante en el Registro Unificado de Solicitantes (RUS).</p>
+        <div class="novedad-img-mini" aria-hidden="true"><img src="assets/ilustraciones/formulario.svg" alt=""></div>
+      </div>
+    </div>
+  </article>
+  <article class="novedad-acordeon">
+    <button class="novedad-acordeon-header" aria-expanded="false">
+      <span class="novedad-acordeon-num">3</span>
+      <span class="novedad-acordeon-titulo">Requisitos más flexibles para participantes</span>
+      <span class="novedad-acordeon-chevron">⌄</span>
+    </button>
+    <div class="novedad-acordeon-cuerpo">
+      <div class="novedad-acordeon-cuerpo-inner">
+        <p>Pueden solicitar la ayuda quienes estén matriculadas/admitidas o en disposición de estarlo a la firma del contrato. Desaparecen los requisitos de fecha de finalización de los estudios previos.</p>
+        <div class="novedad-img-mini" aria-hidden="true"><img src="assets/ilustraciones/persona-check.svg" alt=""></div>
+      </div>
+    </div>
+  </article>
+  <article class="novedad-acordeon">
+    <button class="novedad-acordeon-header" aria-expanded="false">
+      <span class="novedad-acordeon-num">4</span>
+      <span class="novedad-acordeon-titulo">Ampliación de quién puede dirigir tesis</span>
+      <span class="novedad-acordeon-chevron">⌄</span>
+    </button>
+    <div class="novedad-acordeon-cuerpo">
+      <div class="novedad-acordeon-cuerpo-inner">
+        <p>Se reconocen explícitamente las personas Ramón y Cajal, certificados I3/R3 de programas posdoctorales del Plan Estatal y la expectativa de nombramiento tras un proceso selectivo público que exija el grado de doctor/a.</p>
+        <div class="novedad-img-mini" aria-hidden="true"><img src="assets/ilustraciones/personas.svg" alt=""></div>
+      </div>
+    </div>
+  </article>
+  <article class="novedad-acordeon">
+    <button class="novedad-acordeon-header" aria-expanded="false">
+      <span class="novedad-acordeon-num">5</span>
+      <span class="novedad-acordeon-titulo">Nuevos criterios de evaluación (75 + 25)</span>
+      <span class="novedad-acordeon-chevron">⌄</span>
+    </button>
+    <div class="novedad-acordeon-cuerpo">
+      <div class="novedad-acordeon-cuerpo-inner">
+        <p>Expediente académico ponderado hasta 75 puntos (umbral 60). Calidad y trayectoria del equipo hasta 25 puntos: 10 trayectoria del/de la director/a de tesis y 15 contexto científico-técnico y formativo del grupo.</p>
+        <div class="novedad-img-mini" aria-hidden="true"><img src="assets/ilustraciones/evaluacion.svg" alt=""></div>
+      </div>
+    </div>
+  </article>
+  <article class="novedad-acordeon">
+    <button class="novedad-acordeon-header" aria-expanded="false">
+      <span class="novedad-acordeon-num">6</span>
+      <span class="novedad-acordeon-titulo">Periodo de orientación posdoctoral (POP)</span>
+      <span class="novedad-acordeon-chevron">⌄</span>
+    </button>
+    <div class="novedad-acordeon-cuerpo">
+      <div class="novedad-acordeon-cuerpo-inner">
+        <p>Dentro de los 4 años de duración máxima de la ayuda se incluye un periodo de hasta 12 meses tras la obtención del título de doctor/a, destinado al perfeccionamiento y especialización profesional.</p>
+        <div class="novedad-img-mini" aria-hidden="true"><img src="assets/ilustraciones/pop.svg" alt=""></div>
+      </div>
+    </div>
+  </article>
+  <article class="novedad-acordeon">
+    <button class="novedad-acordeon-header" aria-expanded="false">
+      <span class="novedad-acordeon-num">7</span>
+      <span class="novedad-acordeon-titulo">Gastos elegibles más amplios</span>
+      <span class="novedad-acordeon-chevron">⌄</span>
+    </button>
+    <div class="novedad-acordeon-cuerpo">
+      <div class="novedad-acordeon-cuerpo-inner">
+        <p>Se incluyen en una única ayuda los gastos de contratación, indemnización por finalización, estancias en centros de I+D y matrícula del programa de doctorado. Desaparece la convocatoria adicional de estancias.</p>
+        <div class="novedad-img-mini" aria-hidden="true"><img src="assets/ilustraciones/moneda.svg" alt=""></div>
+      </div>
+    </div>
+  </article>
+  <article class="novedad-acordeon">
+    <button class="novedad-acordeon-header" aria-expanded="false">
+      <span class="novedad-acordeon-num">8</span>
+      <span class="novedad-acordeon-titulo">Seguimiento simplificado</span>
+      <span class="novedad-acordeon-chevron">⌄</span>
+    </button>
+    <div class="novedad-acordeon-cuerpo">
+      <div class="novedad-acordeon-cuerpo-inner">
+        <p>Solo dos informes científico-técnicos: intermedio (mes 20–21) y final (mes siguiente al fin de la ayuda). Desaparece el informe anual. La evaluación del informe intermedio condiciona la continuidad de la financiación.</p>
+        <div class="novedad-img-mini" aria-hidden="true"><img src="assets/ilustraciones/seguimiento.svg" alt=""></div>
+      </div>
+    </div>
+  </article>
+</div>
     </section>
-
-    <!-- ===== FOTO INTERMEDIA ===== -->
-    <figure class="foto-jovenes">
-      <img src="assets/fotos/foto-novedades.jpg" alt="Jóvenes investigadoras e investigadores trabajando en torno a una mesa con portátiles">
-    </figure>
 
     <!-- ===== CUANTÍA Y GASTOS ===== -->
     <section class="seccion">
@@ -883,85 +1177,38 @@
       </div>
     </section>
 
-    <!-- ===== FECHAS CLAVE ===== -->
-    <section class="seccion">
-      <h2 class="seccion-titulo">Fechas clave de la convocatoria 2026</h2>
-      <div class="fechas-clave">
-        <div class="fecha-card">
-          <span class="badge">Solicitud</span>
-          <div class="fecha-grande">1 – 30 oct. 2026</div>
-          <p>Periodo de presentación de solicitudes. Las presenta el centro de I+D vía registro electrónico de la AEI.</p>
-        </div>
-        <div class="fecha-card">
-          <span class="badge">Resolución provisional</span>
-          <div class="fecha-grande">Junio 2027</div>
-          <p>Publicación de la Propuesta de Resolución Provisional (PRP) con las candidaturas seleccionadas y reservas.</p>
-        </div>
-        <div class="fecha-card">
-          <span class="badge">Inicio de contratos</span>
-          <div class="fecha-grande">Septiembre 2027</div>
-          <p>Incorporación efectiva del personal investigador a los centros de I+D.</p>
-        </div>
-      </div>
-      <p class="aviso-fechas">⚠️ Fechas orientativas. Se confirmarán en el momento de la publicación oficial de la convocatoria en el BOE.</p>
-    </section>
-
-    <!-- ===== CONVOCATORIAS RECIENTES ===== -->
-    <section class="seccion">
-      <h2 class="seccion-titulo">Convocatoria 2026 y anteriores</h2>
-      <div class="convocatoria-card vigente">
-        <div class="convocatoria-info">
-          <h3><span class="anio">2026</span> Convocatoria FPU 2026 — Primera convocatoria gestionada por la AEI</h3>
-          <div class="estado abierta">Próxima publicación · Borrador en tramitación</div>
-        </div>
-        
-      </div>
-      <div class="convocatoria-card">
-        <div class="convocatoria-info">
-          <h3><span class="anio">2024</span> Convocatoria FPU 2024 (Ministerio de Ciencia, Innovación y Universidades)</h3>
-          <div class="estado">Resuelta — gestión Ministerio</div>
-        </div>
-        <a class="btn-aei" href="https://www.universidades.gob.es/" target="_blank" rel="noopener">Información histórica ↗</a>
-      </div>
-      <div class="convocatoria-card">
-        <div class="convocatoria-info">
-          <h3><span class="anio">2023</span> Convocatoria FPU 2023</h3>
-          <div class="estado">Resuelta — gestión Ministerio</div>
-        </div>
-        <a class="btn-aei" href="https://www.universidades.gob.es/" target="_blank" rel="noopener">Información histórica ↗</a>
-      </div>
-    </section>
-
     <!-- ===== ENLACES DE INTERÉS ===== -->
     <section class="seccion">
       <h2 class="seccion-titulo">Enlaces de interés</h2>
-      <div class="tarjetas-grid">
-        <div class="tarjeta">
+      <div class="carrusel-wrapper">
+  <div class="carrusel-pista">
+    <div class="carrusel-item"><div class="tarjeta">
           <h3>Web de la AEI</h3>
           <p>Portal institucional con todas las convocatorias y programas de la Agencia Estatal de Investigación.</p>
           <a class="btn-fpu-outline" href="https://www.aei.gob.es/" target="_blank" rel="noopener">Ir a la AEI</a>
-        </div>
-        <div class="tarjeta">
+        </div></div>
+    <div class="carrusel-item"><div class="tarjeta">
           <h3>Buscador de convocatorias</h3>
           <p>Acceso al buscador oficial de convocatorias de la Agencia Estatal de Investigación.</p>
           <a class="btn-fpu-outline" href="https://www.aei.gob.es/convocatorias" target="_blank" rel="noopener">Convocatorias AEI</a>
-        </div>
-        <div class="tarjeta">
+        </div></div>
+    <div class="carrusel-item"><div class="tarjeta">
           <h3>Buscador de ayudas concedidas</h3>
           <p>Consulta de las ayudas concedidas por la AEI: filtros por convocatoria, área, entidad beneficiaria, persona investigadora y año.</p>
           <a class="btn-fpu-outline" href="https://www.aei.gob.es/ayudas/buscar-ayudas-concedidas" target="_blank" rel="noopener">Ir al buscador</a>
-        </div>
-        <div class="tarjeta">
+        </div></div>
+    <div class="carrusel-item"><div class="tarjeta">
           <h3>Registro Unificado de Solicitantes (RUS)</h3>
           <p>Inscripción previa de personas investigadoras y representantes legales para presentar solicitudes en la AEI.</p>
           <a class="btn-fpu-outline" href="https://www.aei.gob.es/" target="_blank" rel="noopener">Más información</a>
-        </div>
-        <div class="tarjeta">
+        </div></div>
+    <div class="carrusel-item"><div class="tarjeta">
           <h3>Real Decreto 265/2026</h3>
           <p>Real Decreto de modificación de la estructura orgánica básica del Ministerio que traspasa la gestión FPU a la AEI.</p>
           <a class="btn-fpu-outline" href="https://www.boe.es/" target="_blank" rel="noopener">BOE</a>
-        </div>
-      </div>
+        </div></div>
+  </div>
+</div>
     </section>
 
   </main>
@@ -1017,6 +1264,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Acordeones de novedades (estilo card naranja con desplegable animado)
+  document.querySelectorAll('.novedad-acordeon-header').forEach(function (header) {
+    header.addEventListener('click', function () {
+      var card = this.closest('.novedad-acordeon');
+      card.classList.toggle('abierto');
+      this.setAttribute('aria-expanded', card.classList.contains('abierto'));
+    });
+  });
+
+  // Carrusel auto: duplica los items para crear loop sin saltos
+  document.querySelectorAll('.carrusel-pista').forEach(function (pista) {
+    var items = Array.from(pista.children);
+    items.forEach(function (it) { pista.appendChild(it.cloneNode(true)); });
+  });
+
   // Scroll suave
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {
@@ -1035,4 +1297,4 @@ document.addEventListener('DOMContentLoaded', function () {
 </div>
 </body>
 </html>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       

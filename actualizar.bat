@@ -58,7 +58,11 @@ REM ----- 3) Push --------------------------------------------------------------
 echo.
 echo === [3/3] Subiendo a GitHub ===
 git push
-if errorlevel 1 goto :error
+if errorlevel 1 (
+  echo   Sin upstream o auth requerida, reintentando con --set-upstream...
+  git push --set-upstream origin main
+  if errorlevel 1 goto :error
+)
 
 REM ----- Final OK --------------------------------------------------------------
 cls

@@ -36,6 +36,21 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Acordeones de novedades (estilo card naranja con desplegable animado)
+  document.querySelectorAll('.novedad-acordeon-header').forEach(function (header) {
+    header.addEventListener('click', function () {
+      var card = this.closest('.novedad-acordeon');
+      card.classList.toggle('abierto');
+      this.setAttribute('aria-expanded', card.classList.contains('abierto'));
+    });
+  });
+
+  // Carrusel auto: duplica los items para crear loop sin saltos
+  document.querySelectorAll('.carrusel-pista').forEach(function (pista) {
+    var items = Array.from(pista.children);
+    items.forEach(function (it) { pista.appendChild(it.cloneNode(true)); });
+  });
+
   // Scroll suave
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
     anchor.addEventListener('click', function (e) {

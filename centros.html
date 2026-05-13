@@ -7,7 +7,7 @@
 <meta name="description" content="Información FPU 2026 para entidades beneficiarias: requisitos, procedimiento de solicitud, obligaciones, justificación y seguimiento económico.">
 </head>
 <body>
-<div class="fpu-page">
+<div class="fpu-page tema-verde">
 
 <!-- ===== CSS:BEGIN (auto-sync from assets/styles.css) ===== -->
 <style>
@@ -116,8 +116,11 @@
 .breadcrumb a { color: var(--aei-azul); }
 .breadcrumb span { margin: 0 0.4rem; color: #999; }
 
-/* --- Contenido principal --- */
-.fpu-page main { max-width: 1200px; margin: 0 auto; padding: 0 1rem 2rem; }
+/* --- Contenido principal (margen lateral generoso) --- */
+.fpu-page main { max-width: 1200px; margin: 0 auto; padding: 0 2rem 2rem; }
+@media (min-width: 1100px) {
+  .fpu-page main { padding: 0 3rem 2rem; }
+}
 
 /* --- Secciones --- */
 .seccion { margin-bottom: 3rem; }
@@ -187,41 +190,52 @@
   text-decoration: none;
 }
 
-/* --- Hero / Banner: franja superior con la imagen, texto debajo sobre fondo limpio --- */
+/* --- Hero / Banner: TÍTULO DENTRO del banner entre los iconos; texto+botones debajo --- */
 .hero {
   background: var(--aei-azul-claro);
   color: var(--texto-principal);
   position: relative;
   overflow: hidden;
 }
-.hero::before {
-  content: "";
-  display: block;
+.hero-banner-area {
+  position: relative;
   width: 100%;
-  height: 160px;
+  height: 200px;
   background: url('assets/banner-fpu.png') center / cover no-repeat;
   border-bottom: 3px solid var(--fpu-naranja);
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.hero .container {
+.hero-titulo-banner {
+  /* máximo 600px y mucho padding lateral para que NUNCA pise los iconos */
+  max-width: 600px;
+  width: calc(100% - 360px);
+  text-align: center;
+  padding: 0 1rem;
+}
+.hero-titulo-banner h1 {
+  font-size: clamp(1.2rem, 2.2vw, 1.85rem);
+  font-weight: 800;
+  line-height: 1.15;
+  margin: 0;
+  color: var(--aei-azul);
+  text-shadow: 0 1px 2px rgba(255,255,255,0.75), 0 0 12px rgba(218,227,243,0.6);
+}
+.hero-titulo-banner h1 span { color: var(--fpu-naranja); }
+
+.hero-debajo {
   max-width: 900px;
   margin: 0 auto;
   text-align: center;
-  padding: 2rem 1.5rem 2.25rem;
+  padding: 1.5rem 1.5rem 1.75rem;
 }
-.hero-texto h1 {
-  font-size: clamp(1.65rem, 3.6vw, 2.3rem);
-  font-weight: 800;
-  line-height: 1.2;
-  margin: 0 0 0.7rem;
-  color: var(--aei-azul);
-}
-.hero-texto h1 span { color: var(--fpu-naranja); }
-.hero-texto p {
+.hero-debajo p {
   font-size: 1.05rem;
   color: var(--aei-azul-oscuro);
   margin: 0 auto 1.25rem;
   line-height: 1.6;
-  max-width: 640px;
+  max-width: 700px;
 }
 .hero-botones {
   display: flex;
@@ -229,9 +243,32 @@
   flex-wrap: wrap;
   justify-content: center;
 }
+
+/* Botón verde (complementario para "Si eres centro" desde otras páginas) */
+.btn-verde {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radio-borde);
+  font-weight: 600;
+  font-size: 1rem;
+  background: #2db26a;
+  color: var(--texto-claro);
+  border: none;
+  cursor: pointer;
+  transition: background var(--transicion);
+}
+.btn-verde:hover { background: #1f8a4f; color: var(--texto-claro); text-decoration: none; }
+
+@media (max-width: 900px) {
+  .hero-banner-area { height: 160px; }
+  .hero-titulo-banner { width: calc(100% - 220px); }
+  .hero-titulo-banner h1 { font-size: 1.15rem; }
+}
 @media (max-width: 600px) {
-  .hero::before { height: 110px; }
-  .hero .container { padding: 1.5rem 1rem 1.75rem; }
+  .hero-banner-area { height: 120px; }
+  .hero-titulo-banner { width: calc(100% - 140px); }
+  .hero-titulo-banner h1 { font-size: 0.95rem; }
+  .hero-debajo { padding: 1rem 0.75rem 1.25rem; }
 }
 
 /* --- Datos clave (cuadrícula 2×2 por defecto) --- */
@@ -509,9 +546,9 @@
   margin-top: 1rem;
 }
 
-/* --- Foto principal (panorámica con joven investigador/a) --- */
+/* --- Foto panorámica de ancho completo (altura reducida 25%, separada del hero) --- */
 .foto-jovenes {
-  margin: 0 0 2rem;
+  margin: 2rem 0;
   border-radius: var(--radio-borde);
   overflow: hidden;
   box-shadow: var(--sombra-suave);
@@ -521,7 +558,7 @@
   display: block;
   width: 100%;
   height: auto;
-  max-height: 360px;
+  max-height: 270px;   /* antes 360px → -25% */
   object-fit: cover;
 }
 .foto-jovenes figcaption {
@@ -645,6 +682,205 @@
   line-height: 1.5;
 }
 
+/* --- Paleta verde alternativa para centros.html --- */
+.fpu-page.tema-verde {
+  --fpu-naranja: #2db26a;
+  --fpu-naranja-oscuro: #1f8a4f;
+  --fpu-naranja-claro: #d6f0e2;
+}
+
+/* --- Sección a 2 columnas: contenido izq + foto vertical dcha --- */
+.seccion-2col {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+.seccion-2col-foto {
+  width: 100%;
+  border-radius: var(--radio-borde);
+  overflow: hidden;
+  box-shadow: var(--sombra-suave);
+  background: var(--aei-azul-claro);
+}
+.seccion-2col-foto img {
+  width: 100%;
+  display: block;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+}
+/* Variante: datos-clave dentro de la columna izquierda en 2 columnas (2x2) */
+.seccion-2col .datos-clave { grid-template-columns: repeat(2, 1fr); }
+@media (max-width: 900px) {
+  .seccion-2col { grid-template-columns: 1fr; }
+  .seccion-2col-foto img { aspect-ratio: 4 / 3; }
+}
+
+/* --- "Lo que ofrece la ayuda": 4 datos (2x2) izq + texto dcha --- */
+.ofrece-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 2rem;
+  align-items: center;
+}
+.ofrece-grid .datos-clave { grid-template-columns: repeat(2, 1fr); margin: 0; }
+.ofrece-grid .texto p { margin: 0 0 1rem; }
+@media (max-width: 900px) {
+  .ofrece-grid { grid-template-columns: 1fr; }
+}
+
+/* --- "Tu directora de tesis": foto vertical + texto sobre viñeta --- */
+.directora-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 2rem;
+  align-items: center;
+}
+.directora-foto {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-media);
+  display: block;
+}
+.directora-texto {
+  background: radial-gradient(ellipse at 30% 25%, rgba(255,255,255,0.95) 0%, rgba(218,227,243,0.55) 70%, rgba(218,227,243,0.4) 100%);
+  padding: 1.75rem 2rem;
+  border-radius: var(--radio-borde);
+  box-shadow: var(--sombra-suave);
+}
+.directora-texto p:first-child { margin-top: 0; }
+.directora-texto p:last-child { margin-bottom: 0; }
+@media (max-width: 900px) {
+  .directora-grid { grid-template-columns: 1fr; }
+}
+
+/* --- Bloques destacados para doctorandos (azul claro / naranja semi) --- */
+.bloque-destacado {
+  background: var(--fpu-naranja-claro);
+  border-radius: var(--radio-borde);
+  padding: 1.5rem 1.85rem;
+  margin: 1.5rem 0;
+  border-left: 4px solid var(--fpu-naranja);
+}
+.bloque-destacado.azul {
+  background: var(--aei-azul-claro);
+  border-left-color: var(--aei-azul);
+}
+.bloque-destacado h3 { margin-top: 0; color: var(--aei-azul); }
+.bloque-destacado :last-child { margin-bottom: 0; }
+
+/* --- Novedades en acordeones con fondo gradiente naranja --- */
+.novedades-acordeon-lista {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+.novedad-acordeon {
+  background: linear-gradient(135deg, var(--fpu-naranja-claro) 0%, rgba(232,119,34,0.18) 100%);
+  border-radius: var(--radio-borde);
+  overflow: hidden;
+  transition: box-shadow var(--transicion), transform var(--transicion);
+  border: 1px solid rgba(232,119,34,0.25);
+}
+.novedad-acordeon:hover { box-shadow: var(--sombra-media); transform: translateY(-1px); }
+.novedad-acordeon-header {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.25rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: inherit;
+}
+.novedad-acordeon-num {
+  flex-shrink: 0;
+  width: 36px; height: 36px;
+  border-radius: 50%;
+  background: var(--fpu-naranja);
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+  box-shadow: 0 2px 6px rgba(232,119,34,0.4);
+}
+.novedad-acordeon-titulo {
+  flex: 1;
+  color: var(--aei-azul-oscuro);
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.3;
+}
+.novedad-acordeon-chevron {
+  flex-shrink: 0;
+  color: var(--fpu-naranja-oscuro);
+  font-size: 1.4rem;
+  line-height: 1;
+  transition: transform 0.35s ease;
+  user-select: none;
+}
+.novedad-acordeon.abierto .novedad-acordeon-chevron { transform: rotate(180deg); }
+.novedad-acordeon-cuerpo {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.45s ease;
+}
+.novedad-acordeon.abierto .novedad-acordeon-cuerpo { max-height: 500px; }
+.novedad-acordeon-cuerpo-inner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0 1.25rem 1.25rem 4.4rem;
+  color: var(--aei-azul-oscuro);
+}
+.novedad-acordeon-cuerpo-inner p { margin: 0; flex: 1; }
+.novedad-acordeon-cuerpo-inner .novedad-img-mini {
+  flex-shrink: 0;
+  width: 60px; height: 60px;
+  background: rgba(255,255,255,0.65);
+  border-radius: 10px;
+  padding: 8px;
+  display: flex; align-items: center; justify-content: center;
+}
+.novedad-acordeon-cuerpo-inner .novedad-img-mini img { width: 100%; height: 100%; }
+
+/* --- Fechas: orden invertido (fecha arriba, descripción, badge abajo) --- */
+.fecha-card { display: flex; flex-direction: column; }
+.fecha-card .fecha-grande { order: 1; margin-bottom: 0.5rem; }
+.fecha-card p           { order: 2; margin-bottom: 0.75rem; }
+.fecha-card .badge      { order: 3; align-self: flex-start; margin-bottom: 0; }
+
+/* --- Carrusel auto-rotación (3 visibles desktop) --- */
+.carrusel-wrapper {
+  position: relative;
+  overflow: hidden;
+  padding: 0.5rem 0;
+  /* máscara opcional para sutil fade lateral */
+  mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 5%, #000 95%, transparent 100%);
+}
+.carrusel-pista {
+  display: flex;
+  gap: 1.25rem;
+  width: max-content;
+  animation: carrusel-auto 30s linear infinite;
+}
+.carrusel-wrapper:hover .carrusel-pista { animation-play-state: paused; }
+.carrusel-item {
+  flex: 0 0 320px;        /* ancho fijo por item */
+}
+@keyframes carrusel-auto {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }   /* funciona si la pista contiene 2 copias */
+}
+@media (max-width: 900px) {
+  .carrusel-item { flex: 0 0 260px; }
+  .carrusel-pista { animation-duration: 22s; }
+}
+
 /* --- Utilidades --- */
 .text-center { text-align: center; }
 .text-azul { color: var(--aei-azul); }
@@ -708,29 +944,29 @@
   </div>
 
   <section class="hero">
-    <div class="container">
-      <div class="hero-texto">
+    <div class="hero-banner-area">
+      <div class="hero-titulo-banner">
         <h1>Si eres <span>centro</span></h1>
-        <p>Información para entidades beneficiarias FPU 2026: quién puede ser entidad solicitante, cómo se presenta la solicitud, las obligaciones de seguimiento y justificación, y los plazos clave.</p>
-        <div class="hero-botones">
-          <a class="btn-fpu" href="#procedimiento">Cómo solicitar</a>
-          <a class="btn-fpu-outline" href="index.html">Volver al inicio</a>
-        </div>
+      </div>
+    </div>
+    <div class="hero-debajo">
+      <p>Información para entidades beneficiarias FPU 2026: quién puede ser entidad solicitante, cómo se presenta la solicitud, las obligaciones de seguimiento y justificación, y los plazos clave.</p>
+      <div class="hero-botones">
+        <a class="btn-fpu" href="#procedimiento">Cómo solicitar</a>
+        <a class="btn-fpu-outline" href="index.html">Volver al inicio</a>
       </div>
     </div>
   </section>
 
   <main>
 
-    <figure class="foto-jovenes">
-      <img src="assets/fotos/foto-equipo-investigacion.jpg" alt="Equipo de investigación trabajando en el laboratorio">
-    </figure>
-
-    <!-- ===== ENTIDADES BENEFICIARIAS ===== -->
+    <!-- ===== ENTIDADES BENEFICIARIAS (2 cols) ===== -->
     <section class="seccion">
       <h2 class="seccion-titulo">¿Tu centro puede ser entidad beneficiaria?</h2>
-      <p>Pueden ser beneficiarias las entidades que cumplan la condición de organismos de investigación y difusión de conocimientos:</p>
-      <div class="tarjetas-grid">
+      <div class="seccion-2col">
+        <div class="seccion-2col-texto">
+          <p>Pueden ser beneficiarias las entidades que cumplan la condición de organismos de investigación y difusión de conocimientos:</p>
+          <div class="tarjetas-grid">
         <div class="tarjeta"><h3>OPI</h3><p>Organismos públicos de investigación definidos en el artículo 47 de la Ley 14/2011.</p></div>
         <div class="tarjeta"><h3>Universidades</h3><p>Universidades públicas e institutos universitarios; universidades privadas con actividad demostrada en I+D+i, inscritas en el RUCT.</p></div>
         <div class="tarjeta"><h3>Entidades sanitarias</h3><p>Entidades e instituciones sanitarias públicas y privadas sin ánimo de lucro vinculadas al SNS.</p></div>
@@ -738,7 +974,12 @@
         <div class="tarjeta"><h3>Centros tecnológicos</h3><p>Centros Tecnológicos y Centros de Apoyo a la Innovación Tecnológica registrados (RD 2093/2008).</p></div>
         <div class="tarjeta"><h3>Otros centros de I+D+i</h3><p>Centros públicos o privados sin ánimo de lucro, con personalidad jurídica propia, cuya actividad principal sea la I+D+i.</p></div>
       </div>
-      <p class="mt-2">No podrán obtener la condición de beneficiarias las entidades en las que concurra alguna de las circunstancias del artículo 13 de la Ley 38/2003, ni las sujetas a una orden de recuperación pendiente por ayudas declaradas ilegales por la Comisión Europea.</p>
+          <p class="mt-2">No podrán obtener la condición de beneficiarias las entidades en las que concurra alguna de las circunstancias del artículo 13 de la Ley 38/2003, ni las sujetas a una orden de recuperación pendiente por ayudas declaradas ilegales por la Comisión Europea.</p>
+        </div>
+        <div class="seccion-2col-foto">
+          <img src="assets/fotos/foto-equipo-investigacion.jpg" alt="Equipo de investigación en el centro">
+        </div>
+      </div>
     </section>
 
     <!-- ===== PROCEDIMIENTO ===== -->
@@ -764,29 +1005,24 @@
       </ul>
     </section>
 
-    <!-- ===== FOTO INTERMEDIA ===== -->
-    <figure class="foto-jovenes">
-      <img src="assets/fotos/foto-aula-conferencia.jpg" alt="Sesión de presentación en una sala universitaria">
-    </figure>
-
     <!-- ===== FECHAS CLAVE ===== -->
     <section class="seccion">
       <h2 class="seccion-titulo">Fechas clave para el centro</h2>
       <div class="fechas-clave">
         <div class="fecha-card">
-          <span class="badge">Presentación de solicitudes</span>
           <div class="fecha-grande">1 – 30 oct. 2026</div>
           <p>El centro envía telemáticamente la solicitud por cada candidatura, validada por la representación legal.</p>
+          <span class="badge">Presentación de solicitudes</span>
         </div>
         <div class="fecha-card">
-          <span class="badge">PRP</span>
           <div class="fecha-grande">Junio 2027</div>
           <p>Publicación de la Propuesta de Resolución Provisional. Plazo de alegaciones según convocatoria.</p>
+          <span class="badge">PRP</span>
         </div>
         <div class="fecha-card">
-          <span class="badge">Incorporación</span>
           <div class="fecha-grande">Septiembre 2027</div>
           <p>Inicio de los contratos predoctorales. Hasta 9 meses prorrogables desde la concesión.</p>
+          <span class="badge">Incorporación</span>
         </div>
       </div>
       <p class="aviso-fechas">⚠️ Fechas orientativas. Se confirmarán en la publicación oficial en el BOE.</p>
@@ -903,6 +1139,21 @@ document.addEventListener('DOMContentLoaded', function () {
         contenido.classList.add('activo');
       }
     });
+  });
+
+  // Acordeones de novedades (estilo card naranja con desplegable animado)
+  document.querySelectorAll('.novedad-acordeon-header').forEach(function (header) {
+    header.addEventListener('click', function () {
+      var card = this.closest('.novedad-acordeon');
+      card.classList.toggle('abierto');
+      this.setAttribute('aria-expanded', card.classList.contains('abierto'));
+    });
+  });
+
+  // Carrusel auto: duplica los items para crear loop sin saltos
+  document.querySelectorAll('.carrusel-pista').forEach(function (pista) {
+    var items = Array.from(pista.children);
+    items.forEach(function (it) { pista.appendChild(it.cloneNode(true)); });
   });
 
   // Scroll suave
