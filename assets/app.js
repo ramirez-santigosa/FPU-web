@@ -40,6 +40,14 @@ document.addEventListener('DOMContentLoaded', function () {
     });
   });
 
+  // Mensaje del director (carta desplegable única)
+  document.querySelectorAll('.mensaje-director-cta').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var open = btn.getAttribute('aria-expanded') === 'true';
+      btn.setAttribute('aria-expanded', open ? 'false' : 'true');
+    });
+  });
+
   // Carrusel manual con scroll nativo + flechas + dots
   document.querySelectorAll('.carrusel-wrapper').forEach(function (W) {
     var cont = W.querySelector('.carrusel-pista-cont');
@@ -102,7 +110,7 @@ document.addEventListener('DOMContentLoaded', function () {
     window.addEventListener('resize', update, { passive: true });
     window.addEventListener('load', update);
     update();
-  });  });
+  });
 
   // Scroll suave + scroll-spy
   var sticky = document.querySelectorAll('.acceso-rapido a[href^="#"]');
